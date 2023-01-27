@@ -1,28 +1,34 @@
-import { extendBaseTheme, extendTheme } from "@chakra-ui/react";
+import { ThemeOverride, extendTheme } from "@chakra-ui/react";
 import "@fontsource/open-sans/700.css"
 import "@fontsource/open-sans/300.css"
 import "@fontsource/open-sans/400.css"
 import { Button } from "./button";
-export const theme =extendTheme({
-    colors:{
-        brand:{
-            100:'#ff3c00'
-        }
+let base:ThemeOverride<{}>;
 
+base = {
+    
+    colors: {
+        brand: {
+            100: '#ff3c00'
+        }
     },
-    styles:{
-        global:()=>({
-            body:{
-                bg:"gray.200"
+    styles: {
+        global: () => ({
+            body: {
+                bg: "gray.200"
             }
-            
         })
     },
-    components:{
-        Button      
-          },
+    components: {
+        Button
+    },
 
-    fonts:{
-        body:'Open Sans, sans-serif'
+    fonts: {
+
+        body: 'Open Sans, sans-serif',
+
     }
-})
+    
+};
+
+export const theme =extendTheme(base)
