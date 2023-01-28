@@ -76,7 +76,7 @@ const SignUp:React.FC<SignUpProps> = () => {
           type={"password"}
           mb={4}
           fontSize={"10pt"}
-          value={SignupForm.password}
+          value={SignupForm.confirmPassword}
           onChange={setFormValues()}
         />
         <Button width={"100%"} height="36px" mb={2} type="submit">
