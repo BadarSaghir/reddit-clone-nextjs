@@ -3,7 +3,7 @@ import React, { PropsWithChildren } from "react";
 import RightContent from "../RightContent";
 import SearchInput from "../SearchInput";
 // import  RedditLogo from "../../../public/images/redditFace.svg"
-type NavbarProps = {} & PropsWithChildren;
+type NavbarProps = PropsWithChildren;
 
 const Navbar: React.FC<NavbarProps> = () => (
     <Flex bg={"white"} height="44px" padding={"6px 12px"}>

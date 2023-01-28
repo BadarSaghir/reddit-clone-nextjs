@@ -1,5 +1,8 @@
 import { Button, Flex, Input,Text } from "@chakra-ui/react";
+import { FirebaseError } from "firebase/app";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import React, { PropsWithChildren, useState } from "react";
+import { auth } from "../../../firebase/clientApp";
 import { useAppDispatch } from "../../../hooks";
 import {openModalState} from "./authModalSlice";
 
@@ -7,6 +10,8 @@ type LogInProps = {} & PropsWithChildren;
 
 const LogIn: React.FC<LogInProps> = () => {
   const [loginForm, setLoginForm] = useState({ email: "", password: "" });
+  const [isLoading,setIsLoading]= useState(false);
+  const [error,setError]= useState("")
 const dispatch = useAppDispatch()
   const setFormValues = () => {
     return (e: React.ChangeEvent<HTMLInputElement>): void => {
@@ -16,7 +21,18 @@ const dispatch = useAppDispatch()
     };
   };
 
-  const onSubmit = () => {};
+  const onSubmit = async(e:React.FormEvent<HTMLFormElement>) => {
+e.preventDefault()
+setIsLoading(true)
+setError("")
+try {
+ await signInWithEmailAndPassword(auth,loginForm.email,loginForm.password)
+} catch (error) {
+  if(error instanceof FirebaseError)setError(error.message.split(":")[1])
+}
+setIsLoading(false)
+
+  };
 
   return (
     <form onSubmit={onSubmit}>
@@ -53,12 +69,13 @@ const dispatch = useAppDispatch()
         name="password"
         placeholder="Password"
         type={"password"}
-        mb={4}
+        mb={2}
         fontSize={"10pt"}
         value={loginForm.password}
         onChange={setFormValues()}
       />
-      <Button width={"100%"} height="36px" mb={2} type="submit">
+      <Text color={"red.600"} textAlign={"center"} fontSize={"10pt"}>{error && error}</Text>
+      <Button isLoading={isLoading} width={"100%"} height="36px" mt={2} mb={2} type="submit">
         Login
       </Button>
       <Flex fontSize={"9pt"} justifyContent="center">
