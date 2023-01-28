@@ -3,6 +3,7 @@ import "@fontsource/open-sans/700.css"
 import "@fontsource/open-sans/300.css"
 import "@fontsource/open-sans/400.css"
 import { Button } from "./button";
+import {Input} from "./input"
 let base:ThemeOverride<{}>;
 
 base = {
@@ -20,7 +21,8 @@ base = {
         })
     },
     components: {
-        Button
+        Button,
+        Input
     },
 
     fonts: {
