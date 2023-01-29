@@ -24,7 +24,7 @@ const RightContent: React.FC<RightContentProps> = ({ user }) => {
     <>
       <AuthModal />
       {/* {auth?auth.currentUser?.email:""} */}
-      <Flex border={"1px solid black"} justifyContent={"center"} align={"center"} textAlign={"center"}>
+      <Flex  justifyContent={"center"} align={"center"} textAlign={"center"}>
         {user ? <Icons /> : <AuthButton />}
       </Flex>
     </>
