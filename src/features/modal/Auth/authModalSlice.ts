@@ -1,10 +1,11 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
+import {  createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 
 export interface AuthModalState {
   open: boolean,
   view: 'login' | 'signup' | 'resetPassword'
 }
+
 
 const initialState: AuthModalState = {
   open: false,

@@ -5,6 +5,7 @@ import {
   signInWithPopup,
 } from "firebase/auth";
 import React, { PropsWithChildren, useState } from "react";
+import { LOCAL_STORAGE_KEYS } from "../../../constants";
 import { auth } from "../../../firebase/clientApp";
 import { useAppDispatch } from "../../../hooks";
 import { closeModalState } from "./authModalSlice";
@@ -25,7 +26,7 @@ const OAuthButton: React.FC<OAuthButtonProps> = () => {
     setLoading(true);
     try {
       const userCredential = await signInWithPopup(auth, provider);
-      
+      localStorage.setItem(LOCAL_STORAGE_KEYS.UserCredential,JSON.stringify(userCredential))
       dispatch(setUserInfo(userCredential.user))
 
       dispatch(closeModalState())

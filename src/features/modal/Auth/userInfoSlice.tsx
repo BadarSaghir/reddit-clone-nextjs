@@ -1,11 +1,15 @@
 import {  createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { User } from 'firebase/auth';
+import { browserSessionPersistence, User, UserCredential } from 'firebase/auth';
+import { LOCAL_STORAGE_KEYS } from '../../../constants';
 import { auth } from '../../../firebase/clientApp';
 
 
 export interface UserInfoState {
   user:User|null;
 }
+
+
+auth.setPersistence(browserSessionPersistence)
 
 const initialState: UserInfoState = {
   user:auth.currentUser

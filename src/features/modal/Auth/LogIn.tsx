@@ -2,6 +2,7 @@ import { Button, Flex, Input,Text } from "@chakra-ui/react";
 import { FirebaseError } from "firebase/app";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import React, { PropsWithChildren, useState } from "react";
+import { LOCAL_STORAGE_KEYS } from "../../../constants";
 import { auth } from "../../../firebase/clientApp";
 import { useAppDispatch } from "../../../hooks";
 import {closeModalState, openModalState} from "./authModalSlice";
@@ -28,6 +29,7 @@ setIsLoading(true)
 setError("")
 try {
  const user=await signInWithEmailAndPassword(auth,loginForm.email,loginForm.password)
+  localStorage.setItem(LOCAL_STORAGE_KEYS.UserCredential,JSON.stringify(user))
 dispatch(setUserInfo(user.user))
  dispatch(closeModalState())
 } catch (error) {
