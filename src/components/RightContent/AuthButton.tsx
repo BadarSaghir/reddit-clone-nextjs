@@ -3,9 +3,7 @@ import React, { PropsWithChildren } from 'react';
 import { openModalState } from '../../features/modal/Auth/authModalSlice';
 import { useAppDispatch } from '../../hooks';
 
-type AuthButtonProps = {
-    
-}&PropsWithChildren;
+type AuthButtonProps = PropsWithChildren;
 
 const AuthButton:React.FC<AuthButtonProps> = () => {
     const dispatch = useAppDispatch()
