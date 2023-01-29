@@ -8,9 +8,10 @@ import {
 import React, { PropsWithChildren, useState } from "react";
 import { auth } from "../../../firebase/clientApp";
 import { useAppDispatch } from "../../../hooks";
-import { openModalState } from "./authModalSlice";
+import { closeModalState, openModalState } from "./authModalSlice";
+import { setUserInfo } from "./userInfoSlice";
 
-type SignUpProps =  PropsWithChildren;
+type SignUpProps = PropsWithChildren;
 
 const SignUp: React.FC<SignUpProps> = () => {
   // const provider = new GoogleAuthProvider();
@@ -40,11 +41,14 @@ const SignUp: React.FC<SignUpProps> = () => {
         setIsLoading(false);
         return;
       }
-      const user = await createUserWithEmailAndPassword(
+      const userCredential = await createUserWithEmailAndPassword(
         auth,
         signupForm.email,
         signupForm.password
       );
+      dispatch(setUserInfo(userCredential.user));
+
+      dispatch(closeModalState());
     } catch (error: unknown) {
       if (error instanceof FirebaseError)
         setError(String(error.message.split(":")[1]));

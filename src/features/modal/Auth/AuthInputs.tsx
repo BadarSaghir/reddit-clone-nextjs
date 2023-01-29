@@ -4,9 +4,7 @@ import { useAppSelector } from '../../../hooks';
 import LogIn from './LogIn';
 import SignUp from './SignUp';
 
-type AuthInputsProps = {
-    
-} & PropsWithChildren;
+type AuthInputsProps = PropsWithChildren;
 
 const AuthInputs:React.FC<AuthInputsProps> = () => {
     const {open,view} = useAppSelector((state)=>state.authModal)

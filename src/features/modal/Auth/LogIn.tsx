@@ -4,9 +4,10 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import React, { PropsWithChildren, useState } from "react";
 import { auth } from "../../../firebase/clientApp";
 import { useAppDispatch } from "../../../hooks";
-import {openModalState} from "./authModalSlice";
+import {closeModalState, openModalState} from "./authModalSlice";
+import { setUserInfo } from "./userInfoSlice";
 
-type LogInProps = {} & PropsWithChildren;
+type LogInProps =  PropsWithChildren;
 
 const LogIn: React.FC<LogInProps> = () => {
   const [loginForm, setLoginForm] = useState({ email: "", password: "" });
@@ -26,7 +27,9 @@ e.preventDefault()
 setIsLoading(true)
 setError("")
 try {
- await signInWithEmailAndPassword(auth,loginForm.email,loginForm.password)
+ const user=await signInWithEmailAndPassword(auth,loginForm.email,loginForm.password)
+dispatch(setUserInfo(user.user))
+ dispatch(closeModalState())
 } catch (error) {
   if(error instanceof FirebaseError)setError(error.message.split(":")[1])
 }

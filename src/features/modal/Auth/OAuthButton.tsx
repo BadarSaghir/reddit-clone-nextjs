@@ -6,6 +6,9 @@ import {
 } from "firebase/auth";
 import React, { PropsWithChildren, useState } from "react";
 import { auth } from "../../../firebase/clientApp";
+import { useAppDispatch } from "../../../hooks";
+import { closeModalState } from "./authModalSlice";
+import { setUserInfo } from "./userInfoSlice";
 
 type OAuthButtonProps = PropsWithChildren;
 
@@ -14,6 +17,7 @@ const OAuthButton: React.FC<OAuthButtonProps> = () => {
   const [loading, setLoading] = useState(false);
   provider.addScope("email");
   provider.addScope("profile");
+  const dispatch = useAppDispatch()
   // provider.addScope("https://www.googleapis.com/auth/contacts.readonly")
   async function onOAuth(
    
@@ -21,9 +25,10 @@ const OAuthButton: React.FC<OAuthButtonProps> = () => {
     setLoading(true);
     try {
       const userCredential = await signInWithPopup(auth, provider);
-      userCredential.user
+      
+      dispatch(setUserInfo(userCredential.user))
 
-
+      dispatch(closeModalState())
       // alert(JSON.stringify(userCredential))
     } catch (error) { /* empty */ }
     setLoading(false);

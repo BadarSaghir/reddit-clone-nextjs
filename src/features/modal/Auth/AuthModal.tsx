@@ -17,7 +17,7 @@ import AuthInputs from "./AuthInputs";
 import { closeModalState, openModalState } from "./authModalSlice";
 import OAuthButton from "./OAuthButton";
 
-type AuthModelProps = {} & PropsWithChildren;
+type AuthModelProps =  PropsWithChildren;
 
 const AuthModal: React.FC<AuthModelProps> = () => {
   const dispatch = useAppDispatch();

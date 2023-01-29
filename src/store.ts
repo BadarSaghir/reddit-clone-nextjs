@@ -1,11 +1,12 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit'
+import userInfoReducer from './features/modal/Auth/userInfoSlice'
 
 import counterReducer from './features/counter/counterSlice'
 import authModalReducer from "./features/modal"
 
 export function makeStore() {
   return configureStore({
-    reducer: { counter: counterReducer,authModal:authModalReducer },
+    reducer: { counter: counterReducer,authModal:authModalReducer,userInfo:userInfoReducer },
   })
 }
 
