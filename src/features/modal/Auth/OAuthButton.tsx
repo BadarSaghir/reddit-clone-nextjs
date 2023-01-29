@@ -29,7 +29,6 @@ const OAuthButton: React.FC<OAuthButtonProps> = () => {
       dispatch(setUserInfo(userCredential.user))
 
       dispatch(closeModalState())
-      // alert(JSON.stringify(userCredential))
     } catch (error) { /* empty */ }
     setLoading(false);
   }

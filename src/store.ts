@@ -6,6 +6,9 @@ import authModalReducer from "./features/modal"
 
 export function makeStore() {
   return configureStore({
+    middleware(getDefaultMiddleware) {
+       return getDefaultMiddleware({serializableCheck:false})
+    },
     reducer: { counter: counterReducer,authModal:authModalReducer,userInfo:userInfoReducer },
   })
 }
