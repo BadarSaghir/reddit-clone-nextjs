@@ -135,6 +135,10 @@ const SignUp: React.FC<SignUpProps> = () => {
         Sign Up
       </Button>
       <Flex fontSize={"9pt"} mt={2} justifyContent="center">
+        <Text mr={2} cursor="default">Forgot your Password?</Text>
+        <Text color={"blue.500"} fontWeight={900} cursor="pointer" onClick={()=>{dispatch(openModalState("resetPassword"))}}>Reset</Text>
+      </Flex>
+      <Flex fontSize={"9pt"}  justifyContent="center">
         <Text mr={2} cursor="default">
           Already have an account?
         </Text>

@@ -2,6 +2,7 @@ import { initializeApp,getApp,getApps } from "firebase/app";
 import {connectFirestoreEmulator, getFirestore} from "firebase/firestore"
 import {connectAuthEmulator, getAuth} from "firebase/auth"
 import {connectStorageEmulator, getStorage} from "firebase/storage"
+
 const firebaseConfig = {
   apiKey: "AIzaSyBOpElWQEZFCJ06GKX3pgolZoc0apj7vNI",
   authDomain: "reddit-9523e.firebaseapp.com",

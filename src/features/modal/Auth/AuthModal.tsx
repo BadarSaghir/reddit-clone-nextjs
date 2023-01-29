@@ -16,6 +16,7 @@ import { useAppDispatch, useAppSelector } from "../../../hooks";
 import AuthInputs from "./AuthInputs";
 import { closeModalState, openModalState } from "./authModalSlice";
 import OAuthButton from "./OAuthButton";
+import ResetPassword from "./ResetPassword";
 
 type AuthModelProps =  PropsWithChildren;
 
@@ -48,13 +49,13 @@ const AuthModal: React.FC<AuthModelProps> = () => {
 
             <Flex direction={"column"} justifyContent={"center"} align="center" width={"70%"} 
             >
-              <OAuthButton />
+              {(view=="login"||view=="signup")?(<>
+            <OAuthButton />
               <Text color={"gray.500"} fontWeight={
                 "700"
               } >OR</Text>
-              <AuthInputs />
-              {/* <ResetPassword /> */}
-
+              <AuthInputs />   </>):
+              <ResetPassword />}
             </Flex>
           </ModalBody>
 

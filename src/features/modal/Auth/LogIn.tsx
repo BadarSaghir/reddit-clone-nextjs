@@ -84,9 +84,12 @@ setIsLoading(false)
         Login
       </Button>
       <Flex fontSize={"9pt"} justifyContent="center">
+        <Text mr={2} cursor="default">Forgot your Password?</Text>
+        <Text color={"blue.500"} fontWeight={900} cursor="pointer" onClick={()=>{dispatch(openModalState("resetPassword"))}}>Reset</Text>
+      </Flex>
+      <Flex fontSize={"9pt"} justifyContent="center">
         <Text mr={2} cursor="default">New Here </Text>
         <Text color={"blue.500"} fontWeight={900} cursor="pointer" onClick={()=>{dispatch(openModalState("signup"))}}>Sign Up</Text>
-      
       </Flex>
     </form>
   );
