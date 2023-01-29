@@ -6,9 +6,10 @@ import { signOut, User } from "firebase/auth";
 import { auth } from "../../firebase/clientApp";
 import { useAppDispatch } from "../../hooks";
 import { setUserInfo } from "../../features/modal/Auth/userInfoSlice";
+import Icons from "./Icons";
 
 type RightContentProps = {
-  user: User;
+  user?: User|null;
 } & PropsWithChildren;
 
 const RightContent: React.FC<RightContentProps> = ({ user }) => {
@@ -24,7 +25,7 @@ const RightContent: React.FC<RightContentProps> = ({ user }) => {
       <AuthModal />
       {/* {auth?auth.currentUser?.email:""} */}
       <Flex justify={"center"} align={"center"}>
-        {user ? <Button onClick={logout}>Logout </Button> : <AuthButton />}
+        {user ? <Icons /> : <AuthButton />}
       </Flex>
     </>
   );
