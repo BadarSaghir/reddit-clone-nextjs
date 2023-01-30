@@ -11,6 +11,7 @@ const Icons:React.FC<IconsProps> = () => {
     
     return <Flex>
         <Flex display={{base:"none",md:"flex"}} align="center" borderRight={"1px solid"} borderColor="gray.200">
+            
         {icons.map((icon,idx)=><Flex mr={1.5} ml={1.5} key={idx} padding={1} fontSize={idx==0?20:23} cursor={"pointer"} borderRadius={4} _hover={{bg:"gray.200"}}><Icon as={icon}/></Flex>)}    
         </Flex>
         {rightIcons.map((icon,idx)=><Flex  display={idx==2?{base:"none",md:"flex"}:null} mr={1.5} ml={1.5} key={idx} padding={1} fontSize={20} cursor={"pointer"} borderRadius={4} _hover={{bg:"gray.200"}}><Icon as={icon}/></Flex>)} 
