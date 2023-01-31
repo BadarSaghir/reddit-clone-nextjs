@@ -7,7 +7,7 @@ import {
 import React, { PropsWithChildren, useState } from "react";
 import { LOCAL_STORAGE_KEYS } from "../../../constants";
 import { auth } from "../../../firebase/clientApp";
-import { useAppDispatch } from "../../../hooks";
+import { useAppDispatch } from "../../../hooks/hooks";
 import { closeModalState } from "./authModalSlice";
 import { setUserInfo } from "./userInfoSlice";
 

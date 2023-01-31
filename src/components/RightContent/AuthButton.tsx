@@ -1,7 +1,7 @@
 import { Button } from '@chakra-ui/react';
 import React, { PropsWithChildren } from 'react';
 import { openModalState } from '../../features/modal/Auth/authModalSlice';
-import { useAppDispatch } from '../../hooks';
+import { useAppDispatch } from '../../hooks/hooks';
 
 type AuthButtonProps = PropsWithChildren;
 

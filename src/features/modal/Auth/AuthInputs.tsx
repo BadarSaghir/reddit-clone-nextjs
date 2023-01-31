@@ -1,6 +1,6 @@
 import { Flex } from '@chakra-ui/react';
 import React, { PropsWithChildren } from 'react';
-import { useAppSelector } from '../../../hooks';
+import { useAppSelector } from '../../../hooks/hooks';
 import LogIn from './LogIn';
 import SignUp from './SignUp';
 

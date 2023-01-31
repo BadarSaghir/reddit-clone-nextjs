@@ -12,7 +12,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import React, { PropsWithChildren } from "react";
-import { useAppDispatch, useAppSelector } from "../../../hooks";
+import { useAppDispatch, useAppSelector } from "../../../hooks/hooks";
 import AuthInputs from "./AuthInputs";
 import { closeModalState, openModalState } from "./authModalSlice";
 import OAuthButton from "./OAuthButton";

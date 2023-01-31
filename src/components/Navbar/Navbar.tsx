@@ -9,7 +9,7 @@ import React, {
 } from "react";
 import { setUserInfo } from "../../features/modal/Auth/userInfoSlice";
 import { auth } from "../../firebase/clientApp";
-import { useAppDispatch, useAppSelector } from "../../hooks";
+import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 // import RightContent from "../RightContent";
 import SearchInput from "../SearchInput";
 // import  RedditLogo from "../../../public/images/redditFace.svg"

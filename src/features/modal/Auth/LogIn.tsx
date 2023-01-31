@@ -4,7 +4,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import React, { PropsWithChildren, useState } from "react";
 import { LOCAL_STORAGE_KEYS } from "../../../constants";
 import { auth } from "../../../firebase/clientApp";
-import { useAppDispatch } from "../../../hooks";
+import { useAppDispatch } from "../../../hooks/hooks";
 import {closeModalState, openModalState} from "./authModalSlice";
 import { setUserInfo } from "./userInfoSlice";
 

@@ -5,7 +5,7 @@ import {sendPasswordResetEmail} from "@firebase/auth";
 
 import { auth } from "../../../firebase/clientApp";
 import { BsDot, BsReddit } from "react-icons/bs";
-import { useAppDispatch } from "../../../hooks";
+import { useAppDispatch } from "../../../hooks/hooks";
 import { openModalState } from "./authModalSlice";
 import { FirebaseError } from "firebase/app";
 
