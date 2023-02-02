@@ -43,7 +43,7 @@ const Menu: React.FC<MenuProps> = ({ user }) => {
   );
   const appDispatch = useAppDispatch();
   const handleItemClick = (idx: number) => {
-    return async (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    return async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
       e.preventDefault();
       switch (idx) {
         case 0:
@@ -103,13 +103,15 @@ const Menu: React.FC<MenuProps> = ({ user }) => {
                 <>
                   {" "}
                   <MenuItem
+                  
+                   onClick={handleItemClick(item.id)}
                     bg={"white"}
                     _hover={{ bg: "blue.500", color: "white" }}
                     key={idx}
                     fontWeight={"700"}
                     fontSize={"10pt"}
                   >
-                    <Flex align={"center"} onClick={handleItemClick(item.id)}>
+                    <Flex align={"center"}>
                       <Icon fontSize={20} mr={2} as={item.icon} />
                       {item.text}
                     </Flex>
@@ -128,12 +130,13 @@ const Menu: React.FC<MenuProps> = ({ user }) => {
                     key={idx}
                     fontWeight={"700"}
                     fontSize={"10pt"}
+                    onClick={() => {
+                      appDispatch(openModalState("login"));
+                    }}
                   >
                     <Flex
                       align={"center"}
-                      onClick={() => {
-                        appDispatch(openModalState("login"));
-                      }}
+                    
                     >
                       <Icon fontSize={20} mr={2} as={item.icon} />
                       {item.text}
