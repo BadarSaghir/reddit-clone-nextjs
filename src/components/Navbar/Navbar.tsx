@@ -12,6 +12,7 @@ import { auth } from "../../firebase/clientApp";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 // import RightContent from "../RightContent";
 import SearchInput from "../SearchInput";
+import Directory from "./Directory";
 // import  RedditLogo from "../../../public/images/redditFace.svg"
 const RightContent = React.lazy(() => import("../RightContent"));
 type NavbarProps = PropsWithChildren;
@@ -58,9 +59,9 @@ const Navbar: React.FC<NavbarProps> = () => {
             }}
           />
         </Flex>
+        <Directory user={user} />
         <SearchInput user={user} />
         <RightContent user={user} />
-        {/* <Directory /> */}
       </Flex>
     </Suspense>
   );
