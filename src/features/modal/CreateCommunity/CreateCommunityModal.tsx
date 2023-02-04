@@ -13,10 +13,13 @@ import {
   Input,
   Stack,
   Checkbox,
+  Icon,
 } from "@chakra-ui/react";
 import React, { PropsWithChildren, useState } from "react";
 import { IconType } from "react-icons";
-import { BsFillPersonFill } from "react-icons/bs";
+import { BsEyeFill, BsFillPersonFill } from "react-icons/bs";
+import { HiLockClosed } from "react-icons/hi";
+
 type CreateCommunityModalProps = {
   open: boolean;
   handleOnClose: () => void;
@@ -38,13 +41,13 @@ const C_TYPES: {
     name: "restricted",
     placeholder: "Restricted",
     desc: "Anyone can view, but only approved user can post in this community",
-    icon: BsFillPersonFill,
+    icon: BsEyeFill,
   },
   {
     name: "private",
     placeholder: "Private",
     desc: "Only approve user can view and submit to this community",
-    icon: BsFillPersonFill,
+    icon: HiLockClosed,
   },
 ];
 const CreateCommunityModal: React.FC<CreateCommunityModalProps> = ({
@@ -127,7 +130,8 @@ const CreateCommunityModal: React.FC<CreateCommunityModalProps> = ({
                         name={value.name}
                       >
                         <Flex align="center">
-                          <Text fontSize={"10pt"} mr={1}>
+                            <Icon as={value.icon} mr={2} />
+                          <Text fontSize={"10pt"} mr={2}>
                             {value.placeholder}
                           </Text>
                           <Text fontSize={"8pt"} color="gray.500" pt={0.5}>
