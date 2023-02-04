@@ -39,7 +39,7 @@ const Navbar: React.FC<NavbarProps> = () => {
   ) : (
     <Suspense fallback={<Spinner />}>
       <Flex bg={"white"} height="44px" padding={"6px 12px"}>
-        <Flex align={"center"}>
+        <Flex align={"center"} width={{base:"40px",md:"auto"}} mr={{base:0,md:2}} >
           <Image
             src={"/images/redditFace.svg"}
             alt={"reddit Logo"}
