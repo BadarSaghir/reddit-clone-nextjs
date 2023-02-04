@@ -65,6 +65,10 @@ const CreateCommunityModal: React.FC<CreateCommunityModalProps> = ({
     setCommunityName(e.target.value);
     setCharacterRemain(CHARACTER_LENGTHS - e.target.value.length);
   };
+  async function handleCreateCommunity(e): Promise<React.MouseEventHandler<HTMLButtonElement>> {
+    throw new Error("Function not implemented.");
+  }
+
   return (
     <>
       <Modal isOpen={open} size="lg" onClose={handleOnClose}>
@@ -124,8 +128,7 @@ const CreateCommunityModal: React.FC<CreateCommunityModalProps> = ({
                   {C_TYPES.map((value, idx) => (
                     <>
                       <Checkbox
-                        key={idx}
-                        onChange={() => setCommunityType(value.name)}
+                        key={idx}                        onChange={() => setCommunityType(value.name)}
                         isChecked={value.name === communityType}
                         name={value.name}
                       >
@@ -149,7 +152,7 @@ const CreateCommunityModal: React.FC<CreateCommunityModalProps> = ({
             <Button variant="outline" height="30px" colorScheme={"blue"} mr={"3"} onClick={handleOnClose}>
               Close
             </Button>
-            <Button  height="30px">Create Community</Button>
+            <Button onClick={handleCreateCommunity}  height="30px">Create Community</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
