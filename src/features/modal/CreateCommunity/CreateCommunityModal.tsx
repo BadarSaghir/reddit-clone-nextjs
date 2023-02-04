@@ -67,7 +67,7 @@ const CreateCommunityModal: React.FC<CreateCommunityModalProps> = ({
   };
   return (
     <>
-      <Modal isOpen={open} onClose={handleOnClose}>
+      <Modal isOpen={open} size="lg" onClose={handleOnClose}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader
@@ -145,7 +145,7 @@ const CreateCommunityModal: React.FC<CreateCommunityModalProps> = ({
               </Box>
             </ModalBody>
           </Box>
-          <ModalFooter>
+          <ModalFooter bg="gray.100" borderRadius={"0px 0px 10px 10px"}>
             <Button colorScheme={"blue"} mr={"3"} onClick={handleOnClose}>
               Close
             </Button>
