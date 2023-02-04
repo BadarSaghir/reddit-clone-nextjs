@@ -15,22 +15,46 @@ import {
   Checkbox,
 } from "@chakra-ui/react";
 import React, { PropsWithChildren, useState } from "react";
-import AuthInputs from "../Auth/AuthInputs";
-import OAuthButton from "../Auth/OAuthButton";
-import ResetPassword from "../Auth/ResetPassword";
-
+import { IconType } from "react-icons";
+import { BsFillPersonFill } from "react-icons/bs";
 type CreateCommunityModalProps = {
   open: boolean;
   handleOnClose: () => void;
 } & PropsWithChildren;
 
-const C_TYPES:{name:"private"|"public"|"restricted",placeholder:string}[]=[{name:"public",placeholder:"Public"},{name:"restricted",placeholder:"Restricted"},{name:"private",placeholder:"Private"}]
+const C_TYPES: {
+  name: "private" | "public" | "restricted";
+  placeholder: string;
+  desc: string;
+  icon: IconType;
+}[] = [
+  {
+    name: "public",
+    placeholder: "Public",
+    desc: "Anyone can view, post and comments to this community",
+    icon: BsFillPersonFill,
+  },
+  {
+    name: "restricted",
+    placeholder: "Restricted",
+    desc: "Anyone can view, but only approved user can post in this community",
+    icon: BsFillPersonFill,
+  },
+  {
+    name: "private",
+    placeholder: "Private",
+    desc: "Only approve user can view and submit to this community",
+    icon: BsFillPersonFill,
+  },
+];
 const CreateCommunityModal: React.FC<CreateCommunityModalProps> = ({
   open,
   handleOnClose,
 }) => {
   const [communityName, setCommunityName] = useState("");
-  const [communityType, setCommunityType] = useState<"public"|"restricted"|"private">("public");
+  const [communityType, setCommunityType] = useState<
+    "public" | "restricted" | "private"
+  >("public");
   const CHARACTER_LENGTHS = 21;
   const [characterRemains, setCharacterRemain] = useState(CHARACTER_LENGTHS);
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -94,9 +118,25 @@ const CreateCommunityModal: React.FC<CreateCommunityModalProps> = ({
                   Community Type
                 </Text>
                 <Stack spacing={2}>
-                 {C_TYPES.map((value,idx)=><Checkbox key={idx}
-                 onChange={(e)=>setCommunityType(value.name)} isChecked={value.name===communityType} name={value.name}>{value.placeholder}</Checkbox>)} 
-                 
+                  {C_TYPES.map((value, idx) => (
+                    <>
+                      <Checkbox
+                        key={idx}
+                        onChange={() => setCommunityType(value.name)}
+                        isChecked={value.name === communityType}
+                        name={value.name}
+                      >
+                        <Flex align="center">
+                          <Text fontSize={"10pt"} mr={1}>
+                            {value.placeholder}
+                          </Text>
+                          <Text fontSize={"8pt"} color="gray.500" pt={0.5}>
+                            {value.desc}
+                          </Text>
+                        </Flex>
+                      </Checkbox>
+                    </>
+                  ))}
                 </Stack>
               </Box>
             </ModalBody>
