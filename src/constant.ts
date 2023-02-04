@@ -1,7 +1,9 @@
+import { User } from "firebase/auth";
 import { FieldValue } from "firebase/firestore";
 
 export  enum COLLECTIONS{
-    communities="communities"
+    communities="communities",
+    users="users",
 }
 
 export interface CommunityModel{
@@ -10,3 +12,5 @@ export interface CommunityModel{
     numberOfMembers:number;
     privacyType:"public"|"private"|"restricted"
 }
+
+export type UserModel = User

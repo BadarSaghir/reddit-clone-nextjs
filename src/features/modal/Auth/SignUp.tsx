@@ -5,9 +5,11 @@ import {
   GoogleAuthProvider,
   signInWithEmailAndPassword,
 } from "@firebase/auth";
+import { addDoc, collection } from "firebase/firestore";
 import React, { PropsWithChildren, useState } from "react";
+import { COLLECTIONS } from "../../../constant";
 import { LOCAL_STORAGE_KEYS } from "../../../constants";
-import { auth } from "../../../firebase/clientApp";
+import { auth, firestore } from "../../../firebase/clientApp";
 import { useAppDispatch } from "../../../hooks/hooks";
 import { closeModalState, openModalState } from "./authModalSlice";
 import { setUserInfo } from "./userInfoSlice";
@@ -48,6 +50,7 @@ const SignUp: React.FC<SignUpProps> = () => {
         signupForm.password
       );
       localStorage.setItem(LOCAL_STORAGE_KEYS.UserCredential,JSON.stringify(userCredential))
+     await addDoc(collection(firestore,COLLECTIONS.users),userCredential.user)
       dispatch(setUserInfo(userCredential.user));
 
       dispatch(closeModalState());
@@ -60,7 +63,6 @@ const SignUp: React.FC<SignUpProps> = () => {
     }
     setIsLoading(false);
   };
-
   return (
     <form onSubmit={onSubmit}>
       <Input

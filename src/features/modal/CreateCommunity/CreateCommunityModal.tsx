@@ -37,20 +37,21 @@ const C_TYPES: {
   placeholder: string;
   desc: string;
   icon: IconType;
+  key?:string;
 }[] = [
-  {
+  {key:"1",
     name: "public",
     placeholder: "Public",
     desc: "Anyone can view, post and comments to this community",
     icon: BsFillPersonFill,
   },
-  {
+  {key:"2",
     name: "restricted",
     placeholder: "Restricted",
     desc: "Anyone can view, but only approved user can post in this community",
     icon: BsEyeFill,
   },
-  {
+  {key:"3",
     name: "private",
     placeholder: "Private",
     desc: "Only approve user can view and submit to this community",
@@ -176,7 +177,7 @@ const CreateCommunityModal: React.FC<CreateCommunityModalProps> = ({
                 </Text>
                 <Stack spacing={2}>
                   {C_TYPES.map((value, idx) => (
-                    <>
+                    
                       <Checkbox
                         key={idx}                        onChange={() => setCommunityType(value.name)}
                         isChecked={value.name === communityType}
@@ -192,7 +193,7 @@ const CreateCommunityModal: React.FC<CreateCommunityModalProps> = ({
                           </Text>
                         </Flex>
                       </Checkbox>
-                    </>
+                    
                   ))}
                 </Stack>
               </Box>

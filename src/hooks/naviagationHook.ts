@@ -11,6 +11,7 @@ interface Action {
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface State {
   value:number
+  
   }
   
 const initialState: State = { 
@@ -18,11 +19,9 @@ const initialState: State = {
  };
   
   const reducer:Reducer<State,Action> = (state, action) => {
-    const dispatch= useAppDispatch()
     switch (action.type) {
       case 'logout':
         signOut(auth)
-        dispatch(setUserInfo(null))  
         return state
       case 'profile':
         return state

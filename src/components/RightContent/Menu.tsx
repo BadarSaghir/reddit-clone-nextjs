@@ -17,14 +17,14 @@ import { VscAccount } from "react-icons/vsc";
 import { CgProfile } from "react-icons/cg";
 import { MdOutlineLogin } from "react-icons/md";
 import { useAppDispatch } from "../../hooks/hooks";
-import { auth } from "../../firebase/clientApp";
-import { setUserInfo } from "../../features/modal/Auth/userInfoSlice";
+
 import {
   navigationInitialState,
   navigationReducer,
 } from "../../hooks/naviagationHook";
 import { openModalState } from "../../features/modal/Auth/authModalSlice";
 import { IoSparkles } from "react-icons/io5";
+import { setUserInfo } from "../../features/modal/Auth/userInfoSlice";
 type MenuProps = {
   user: User | null;
 };
@@ -36,20 +36,22 @@ const menuListAuth = [
   { id: 0, icon: MdOutlineLogin, text: "Log In / Sign Up" },
 ];
 
+
 const Menu: React.FC<MenuProps> = ({ user }) => {
-  const [value, dispatch] = useReducer(
+  const [, dispatcher] = useReducer(
     navigationReducer,
     navigationInitialState
   );
   const appDispatch = useAppDispatch();
   const handleItemClick = (idx: number) => {
     return async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-      e.preventDefault();
+     
       switch (idx) {
         case 0:
           break;
         case 1:
-          dispatch({ type: "logout" });
+          appDispatch(setUserInfo(null))  
+          dispatcher({ type: "logout" });
           //  await logout()
           break;
       }
@@ -100,14 +102,14 @@ const Menu: React.FC<MenuProps> = ({ user }) => {
         {user
           ? menuListUser.map((item, idx) => {
               return (
-                <>
+                <span                     key={idx}
+                >
                   {" "}
                   <MenuItem
                   
                    onClick={handleItemClick(item.id)}
                     bg={"white"}
                     _hover={{ bg: "blue.500", color: "white" }}
-                    key={idx}
                     fontWeight={"700"}
                     fontSize={"10pt"}
                   >
@@ -117,17 +119,17 @@ const Menu: React.FC<MenuProps> = ({ user }) => {
                     </Flex>
                   </MenuItem>{" "}
                   {idx < menuListUser.length - 1 && <MenuDivider />}
-                </>
+                </span>
               );
             })
           : menuListAuth.map((item, idx) => {
               return (
-                <>
+                <span key={idx}>
                   {" "}
                   <MenuItem
                     bg={"white"}
                     _hover={{ bg: "blue.500", color: "white" }}
-                    key={idx}
+                   
                     fontWeight={"700"}
                     fontSize={"10pt"}
                     onClick={() => {
@@ -143,7 +145,7 @@ const Menu: React.FC<MenuProps> = ({ user }) => {
                     </Flex>
                   </MenuItem>{" "}
                   {idx < menuListAuth.length - 1 && <MenuDivider />}
-                </>
+                </span>
               );
             })}
       </MenuList>
