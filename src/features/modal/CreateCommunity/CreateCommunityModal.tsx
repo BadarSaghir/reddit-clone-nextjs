@@ -15,10 +15,17 @@ import {
   Checkbox,
   Icon,
 } from "@chakra-ui/react";
+import { doc, DocumentReference, getDoc, serverTimestamp, setDoc } from "firebase/firestore";
 import React, { PropsWithChildren, useState } from "react";
 import { IconType } from "react-icons";
 import { BsEyeFill, BsFillPersonFill } from "react-icons/bs";
 import { HiLockClosed } from "react-icons/hi";
+import { COLLECTIONS, CommunityModel } from "../../../constant";
+import { firestore } from "../../../firebase/clientApp";
+import { useAppSelector } from "../../../hooks/hooks";
+
+// eslint-disable-next-line no-useless-escape
+const FORMAT = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
 
 type CreateCommunityModalProps = {
   open: boolean;
@@ -50,23 +57,60 @@ const C_TYPES: {
     icon: HiLockClosed,
   },
 ];
+
 const CreateCommunityModal: React.FC<CreateCommunityModalProps> = ({
   open,
   handleOnClose,
 }) => {
+  const user = useAppSelector((state)=>state.userInfo.user)
+  const [loading, setLoading]=useState(false)
   const [communityName, setCommunityName] = useState("");
   const [communityType, setCommunityType] = useState<
     "public" | "restricted" | "private"
   >("public");
   const CHARACTER_LENGTHS = 21;
   const [characterRemains, setCharacterRemain] = useState(CHARACTER_LENGTHS);
+  const [error, setError]=useState("")
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value.length > CHARACTER_LENGTHS) return;
     setCommunityName(e.target.value);
     setCharacterRemain(CHARACTER_LENGTHS - e.target.value.length);
   };
-  async function handleCreateCommunity(e): Promise<React.MouseEventHandler<HTMLButtonElement>> {
-    throw new Error("Function not implemented.");
+  async function handleCreateCommunity(_e:React.MouseEvent<HTMLButtonElement, MouseEvent>):Promise< React.MouseEventHandler<HTMLButtonElement>>{
+    setLoading(true)
+    if(FORMAT.test(communityName)|| communityName.length<3){
+      setError("Community name must be between 3-21 characters and can only contains letter and number")
+      setLoading(false)
+
+      return;
+    }
+
+  try {
+    const communityDocRef=  doc(firestore,COLLECTIONS.communities,communityName) as DocumentReference<CommunityModel>;
+    const communityDoc=await getDoc(communityDocRef)
+    if(communityDoc.exists()){
+     setError("Sorry! community already exists, try with different name.")
+   
+     setLoading(false)
+   
+     return
+    }
+    await setDoc<CommunityModel>(communityDocRef,{
+     creatorId:user.uid,
+     createdAt:serverTimestamp(),
+     numberOfMembers:1,
+     privacyType:communityType,
+    })
+    setLoading(false)
+    setCommunityName("")
+    setCommunityType("public")
+    setCharacterRemain(CHARACTER_LENGTHS)
+   handleOnClose()
+       
+  } catch (error) {
+    setLoading(false)
+    setError("An unexpected error occur, check your internet connection and try again")
+  }  
   }
 
   return (
@@ -120,6 +164,12 @@ const CreateCommunityModal: React.FC<CreateCommunityModalProps> = ({
               >
                 {characterRemains} Characters remaining{" "}
               </Text>
+              <Text
+                fontSize={"9pt"}
+                color={error.length !== 0 ? "red" : "gray.500"}
+              >
+                {error} 
+              </Text>
               <Box mt={4} mb={4}>
                 <Text fontWeight={"600"} fontSize={15}>
                   Community Type
@@ -152,7 +202,7 @@ const CreateCommunityModal: React.FC<CreateCommunityModalProps> = ({
             <Button variant="outline" height="30px" colorScheme={"blue"} mr={"3"} onClick={handleOnClose}>
               Close
             </Button>
-            <Button onClick={handleCreateCommunity}  height="30px">Create Community</Button>
+            <Button isLoading={loading} onClick={handleCreateCommunity}  height="30px">Create Community</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
