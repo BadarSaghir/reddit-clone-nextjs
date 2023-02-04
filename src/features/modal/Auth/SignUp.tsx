@@ -5,9 +5,9 @@ import {
   GoogleAuthProvider,
   signInWithEmailAndPassword,
 } from "@firebase/auth";
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, doc, DocumentReference, getDoc, setDoc } from "firebase/firestore";
 import React, { PropsWithChildren, useState } from "react";
-import { COLLECTIONS } from "../../../constant";
+import { COLLECTIONS, UserModel } from "../../../constant";
 import { LOCAL_STORAGE_KEYS } from "../../../constants";
 import { auth, firestore } from "../../../firebase/clientApp";
 import { useAppDispatch } from "../../../hooks/hooks";
@@ -50,7 +50,10 @@ const SignUp: React.FC<SignUpProps> = () => {
         signupForm.password
       );
       localStorage.setItem(LOCAL_STORAGE_KEYS.UserCredential,JSON.stringify(userCredential))
-     await addDoc(collection(firestore,COLLECTIONS.users),userCredential.user)
+      const userDocRef=  doc(firestore,COLLECTIONS.users,userCredential.user.uid) as DocumentReference<UserModel>;
+      const userDoc=await getDoc(userDocRef)
+      if(!userDoc.exists())
+      await setDoc<UserModel>(userDocRef,JSON.parse( JSON.stringify(userCredential.user)))      
       dispatch(setUserInfo(userCredential.user));
 
       dispatch(closeModalState());

@@ -4,9 +4,11 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
 } from "firebase/auth";
+import { addDoc, collection, CollectionReference, doc, DocumentReference, getDoc, setDoc } from "firebase/firestore";
 import React, { PropsWithChildren, useState } from "react";
+import { COLLECTIONS, UserModel } from "../../../constant";
 import { LOCAL_STORAGE_KEYS } from "../../../constants";
-import { auth } from "../../../firebase/clientApp";
+import { auth, firestore } from "../../../firebase/clientApp";
 import { useAppDispatch } from "../../../hooks/hooks";
 import { closeModalState } from "./authModalSlice";
 import { setUserInfo } from "./userInfoSlice";
@@ -27,10 +29,14 @@ const OAuthButton: React.FC<OAuthButtonProps> = () => {
     try {
       const userCredential = await signInWithPopup(auth, provider);
       localStorage.setItem(LOCAL_STORAGE_KEYS.UserCredential,JSON.stringify(userCredential))
+      const userDocRef=  doc(firestore,COLLECTIONS.users,userCredential.user.uid) as DocumentReference<UserModel>;
+      const userDoc=await getDoc(userDocRef)
+      if(!userDoc.exists())
+      await setDoc<UserModel>(userDocRef,JSON.parse( JSON.stringify(userCredential.user)))
       dispatch(setUserInfo(userCredential.user))
-
+    
       dispatch(closeModalState())
-    } catch (error) { /* empty */ }
+    } catch (error) { /* empty */ console.log(error)}
     setLoading(false);
   }
 
