@@ -121,10 +121,12 @@ const CreateCommunityModal: React.FC<CreateCommunityModalProps> = ({
         }
 
         await tansaction.set<CommunityModel>(communityDocRef, {
+          id:communityName,
           creatorId: user.uid,
           createdAt: serverTimestamp(),
           numberOfMembers: 1,
           privacyType: communityType,
+          imageUrl:"",
         });
 
         tansaction.set<communitySnippetsModel>(

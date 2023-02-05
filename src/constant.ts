@@ -1,5 +1,5 @@
 import { User } from "firebase/auth";
-import { FieldValue } from "firebase/firestore";
+import {  Timestamp } from "firebase/firestore";
 
 export  enum COLLECTIONS{
     communities="communities",
@@ -9,10 +9,12 @@ export  enum COLLECTIONS{
 }
 
 export interface CommunityModel{
+    id:string;
     creatorId:string;
-    createdAt:FieldValue;
+    createdAt:Timestamp;
     numberOfMembers:number;
-    privacyType:"public"|"private"|"restricted"
+    privacyType:"public"|"private"|"restricted";
+    imageUrl?:string;
 }
 export interface communitySnippetsModel{
 communityId:string;

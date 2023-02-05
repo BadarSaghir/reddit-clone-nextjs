@@ -19,9 +19,9 @@ const firestore = getFirestore(app)
 const auth = getAuth(app)
 const storage = getStorage(app)
 
-if (!getApps().length){
+// if (!getApps().length)
 connectFirestoreEmulator(firestore,"localhost",8080)
 connectStorageEmulator(storage,"localhost",9199)
 connectAuthEmulator(auth,"http://localhost:9099",{disableWarnings:true})
-}
+
 export {app,firestore,auth, storage}
