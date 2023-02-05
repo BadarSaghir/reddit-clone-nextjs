@@ -14,12 +14,14 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-export const app = !getApps().length? initializeApp(firebaseConfig):getApp();
-export const firestore = getFirestore(app)
-export const auth = getAuth(app)
-export const storage = getStorage(app)
+const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
+const firestore = getFirestore(app)
+const auth = getAuth(app)
+const storage = getStorage(app)
 
+if (!getApps().length){
 connectFirestoreEmulator(firestore,"localhost",8080)
 connectStorageEmulator(storage,"localhost",9199)
 connectAuthEmulator(auth,"http://localhost:9099",{disableWarnings:true})
-//const analytics = getAnalytics(app);
+}
+export {app,firestore,auth, storage}
