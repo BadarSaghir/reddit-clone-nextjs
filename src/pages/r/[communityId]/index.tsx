@@ -1,6 +1,6 @@
 // eslint-disable react/prop-types
 import { doc, getDoc } from 'firebase/firestore';
-import { GetServerSideProps, NextPage } from 'next';
+import { GetServerSideProps, GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import React from 'react';
 import safeJsonStringify from 'safe-json-stringify';
 import Header from '../../../components/Community/Header';
@@ -28,15 +28,36 @@ const RCommunity :NextPage<RCommunityProps> = ({communityData }) => {
         <>
         <p>hel</p>
         
-        </>
+    </>
     </PageContent>
     </>
 }
 
-export const  getServerSideProps:GetServerSideProps = async (context)=>{
+// export const  getServerSideProps:GetServerSideProps = async (context)=>{
+
+//     try {
+//         const communityDocRef =doc(firestore,COLLECTIONS.communities,context.query.communityId as string)
+//        const communityDoc= await getDoc(communityDocRef)
+//       const communityData= communityDoc.data()
+//       const data = communityData as CommunityModel;
+
+//        return {
+//         props:{
+//             communityData:communityDoc.exists() ?JSON.parse(safeJsonStringify({...data})):"" 
+//         }
+//        }
+//     } catch (error) {
+//         return {
+//             props:{communityData:""}
+//         }
+//     }
+
+// }
+
+export const  getStaticProps:GetStaticProps = async (context)=>{
 
     try {
-        const communityDocRef =doc(firestore,COLLECTIONS.communities,context.query.communityId as string)
+        const communityDocRef =doc(firestore,COLLECTIONS.communities,context.params.communityId as string)
        const communityDoc= await getDoc(communityDocRef)
       const communityData= communityDoc.data()
       const data = communityData as CommunityModel;
@@ -44,13 +65,24 @@ export const  getServerSideProps:GetServerSideProps = async (context)=>{
        return {
         props:{
             communityData:communityDoc.exists() ?JSON.parse(safeJsonStringify({...data})):"" 
-        }
+        },
+        revalidate:60
        }
     } catch (error) {
         return {
-            props:{communityData:""}
+            props:{communityData:""},
+            revalidate:60
+
         }
     }
 
 }
+
+export const getStaticPaths: GetStaticPaths<{ slug: string }> = async () => {
+    return {
+        paths: [], //indicates that no page needs be created at build time
+        fallback: 'blocking' //indicates the type of fallback
+    }
+}
+
 export default RCommunity;
