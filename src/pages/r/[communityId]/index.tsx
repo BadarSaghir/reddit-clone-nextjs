@@ -2,7 +2,8 @@
 import { doc, getDoc } from 'firebase/firestore';
 import { GetServerSideProps, GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import Link from 'next/link';
-import React from 'react';
+import { useRouter } from 'next/router';
+import React, { useEffect } from 'react';
 import safeJsonStringify from 'safe-json-stringify';
 import Header from '../../../components/Community/Header';
 import NotFound from '../../../components/Community/NotFound';
@@ -15,8 +16,16 @@ type RCommunityProps = {
 };
 
 const RCommunity :NextPage<RCommunityProps> = ({communityData }) => {
+    const router = useRouter()
 
-//    console.log("Community Data",communityData)
+    // If the page is not yet generated, this will be displayed
+    // initially until getStaticProps() finishes running
+    if (router.isFallback) {
+        
+      return <div>Loading...</div>
+    }
+    
+    
     if(!communityData){
         return <NotFound/>
     }
@@ -83,7 +92,7 @@ export const  getStaticProps:GetStaticProps = async (context)=>{
 export const getStaticPaths: GetStaticPaths<{ slug: string }> = async () => {
     return {
         paths: [], //indicates that no page needs be created at build time
-        fallback: 'blocking' //indicates the type of fallback
+        fallback: true //indicates the type of fallback
     }
 }
 
