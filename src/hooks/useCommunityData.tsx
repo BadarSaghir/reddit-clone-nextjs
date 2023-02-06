@@ -1,6 +1,7 @@
 import { collection, CollectionReference, doc, DocumentData, DocumentReference, getDocs, increment, writeBatch } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react';
 import { COLLECTIONS, CommunityModel, communitySnippetsModel } from '../constant';
+import { openModalState } from '../features/modal/Auth/authModalSlice';
 import { setSnippet } from '../features/modal/CreateCommunity/createCommunitySlice';
 import { firestore } from '../firebase/clientApp';
 import { useAppDispatch, useAppSelector } from './hooks';
@@ -15,6 +16,13 @@ const useCommunityData= () => {
     const  onJoinOrLeaveCommunity =(communityData:CommunityModel,isJoined:boolean)=>{
         setLoading(true)
         try {
+            if(!user){
+                setLoading(false)
+                dispatch(openModalState("login"))
+
+                throw new Error("User Is not login!")
+             
+            }
             if(isJoined) 
             leaveCommunity(communityData.id) 
             else if(!isJoined)
@@ -23,14 +31,17 @@ const useCommunityData= () => {
             setError(error)
         }
      
-        setLoading(true)
+        setLoading(false)
 
     }
 
 
    useEffect(()=>{
-    if(user?.uid)
+    if(user?.uid){
     getMySnippets()
+    }else{
+        dispatch(setSnippet([]))
+    }
 
    },[user?.uid]) 
     const  joinCommunity =async(data:CommunityModel)=>{
