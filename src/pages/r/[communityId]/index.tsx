@@ -1,6 +1,7 @@
 // eslint-disable react/prop-types
 import { doc, getDoc } from 'firebase/firestore';
 import { GetServerSideProps, GetStaticPaths, GetStaticProps, NextPage } from 'next';
+import Link from 'next/link';
 import React from 'react';
 import safeJsonStringify from 'safe-json-stringify';
 import Header from '../../../components/Community/Header';
@@ -22,11 +23,12 @@ const RCommunity :NextPage<RCommunityProps> = ({communityData }) => {
     return <><Header communityData={communityData}/>
     <PageContent>
         <>
-        <p>hel</p>
+        <Link href={"/r/riverpod"}>river</Link>
         
         </>
         <>
-        <p>hel</p>
+
+        <Link href={"/r/leg"}>leg</Link>
         
     </>
     </PageContent>
