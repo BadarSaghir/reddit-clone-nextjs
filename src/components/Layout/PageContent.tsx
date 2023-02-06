@@ -15,4 +15,5 @@ const PageContent: React.FC<PageContentProps> = ({children}) => {
     </Flex>
   );
 };
+
 export default PageContent;

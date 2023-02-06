@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types */
+// eslint-disable react/prop-types
 import { doc, getDoc } from 'firebase/firestore';
 import { GetServerSideProps, NextPage } from 'next';
 import React from 'react';
@@ -13,7 +13,6 @@ type RCommunityProps = {
     communityData?:CommunityModel & {id:string}
 };
 
-// eslint-disable-next-line react/prop-types
 const RCommunity :NextPage<RCommunityProps> = ({communityData }) => {
 
 //    console.log("Community Data",communityData)
@@ -22,8 +21,14 @@ const RCommunity :NextPage<RCommunityProps> = ({communityData }) => {
     }
     return <><Header communityData={communityData}/>
     <PageContent>
+        <>
         <p>hel</p>
+        
+        </>
+        <>
         <p>hel</p>
+        
+        </>
     </PageContent>
     </>
 }

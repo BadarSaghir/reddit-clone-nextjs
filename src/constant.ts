@@ -18,6 +18,7 @@ export interface CommunityModel{
 }
 export interface communitySnippetsModel{
 communityId:string;
-isModerator:boolean;
+isModerator?:boolean;
+imageUrl?:string;
 }
 export type UserModel = User

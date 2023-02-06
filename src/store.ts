@@ -1,3 +1,4 @@
+import  communityReducer  from './features/modal/CreateCommunity/createCommunitySlice';
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit'
 import userInfoReducer from './features/modal/Auth/userInfoSlice'
 
@@ -9,7 +10,7 @@ export function makeStore() {
     middleware(getDefaultMiddleware) {
        return getDefaultMiddleware({serializableCheck:false})
     },
-    reducer: { counter: counterReducer,authModal:authModalReducer,userInfo:userInfoReducer },
+    reducer: { counter: counterReducer,authModal:authModalReducer,userInfo:userInfoReducer,communities:communityReducer },
   })
 }
 
