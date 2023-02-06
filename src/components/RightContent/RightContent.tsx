@@ -8,6 +8,7 @@ import { useAppDispatch } from "../../hooks/hooks";
 import { setUserInfo } from "../../features/modal/Auth/userInfoSlice";
 import Icons from "./Icons";
 import Menu from "./Menu"
+import { resetSnippet } from "../../features/modal/CreateCommunity/createCommunitySlice";
 type RightContentProps = {
   user?: User|null;
 } & PropsWithChildren;
@@ -16,7 +17,8 @@ const RightContent: React.FC<RightContentProps> = ({ user }) => {
   function logout() {
     const dispatch= useAppDispatch()
     signOut(auth)
-    dispatch(setUserInfo(null))  
+    dispatch(setUserInfo(null)) 
+    dispatch(resetSnippet()) 
   }
 
   return (

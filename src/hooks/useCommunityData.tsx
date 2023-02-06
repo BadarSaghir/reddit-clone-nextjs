@@ -1,7 +1,7 @@
-import { collection, CollectionReference, DocumentData, getDocs } from 'firebase/firestore';
+import { collection, CollectionReference, doc, DocumentData, DocumentReference, getDocs, increment, writeBatch } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react';
 import { COLLECTIONS, CommunityModel, communitySnippetsModel } from '../constant';
-import { addSnippet } from '../features/modal/CreateCommunity/createCommunitySlice';
+import { setSnippet } from '../features/modal/CreateCommunity/createCommunitySlice';
 import { firestore } from '../firebase/clientApp';
 import { useAppDispatch, useAppSelector } from './hooks';
 
@@ -13,10 +13,18 @@ const useCommunityData= () => {
     const [loading,setLoading] =useState(false)
     const [error,setError] =useState(false)
     const  onJoinOrLeaveCommunity =(communityData:CommunityModel,isJoined:boolean)=>{
-        if(isJoined) 
-        leaveCommunity(communityData.id) 
-        else if(!isJoined)
-        joinCommunity(communityData)
+        setLoading(true)
+        try {
+            if(isJoined) 
+            leaveCommunity(communityData.id) 
+            else if(!isJoined)
+            joinCommunity(communityData)
+        } catch (error) {
+            setError(error)
+        }
+     
+        setLoading(true)
+
     }
 
 
@@ -25,23 +33,64 @@ const useCommunityData= () => {
     getMySnippets()
 
    },[user?.uid]) 
-    const  joinCommunity =(data:CommunityModel)=>{}
-    const  leaveCommunity =(id:string)=>{}
+    const  joinCommunity =async(data:CommunityModel)=>{
+        setLoading(true)
+        try {
+            const batch=writeBatch(firestore)
+
+            const newCommunitySnippet:communitySnippetsModel={
+                communityId:data.id,
+                imageUrl:data.imageUrl||"",
+               
+            }
+            batch.set(doc(firestore,`users/${user.uid}/${COLLECTIONS.communitySnippets}`,data.id),newCommunitySnippet)
+            batch.update<CommunityModel>(doc(firestore,`${COLLECTIONS.communities}` ,data.id) as DocumentReference<CommunityModel>,{
+numberOfMembers:increment(1)
+            })
+          await  batch.commit()
+          dispatch(setSnippet([...communityStateValue.mySnippets,newCommunitySnippet]))
+
+        } catch (error) {
+            setError(error)
+        }
+        setLoading(false)
+
+    }
+    const  leaveCommunity =async (id:string)=>{
+        setLoading(true)
+        try {
+            const batch=writeBatch(firestore)
+
+         
+            batch.delete(doc(firestore,`users/${user.uid}/${COLLECTIONS.communitySnippets}`,id))
+            batch.update<CommunityModel>(doc(firestore,`${COLLECTIONS.communities}` ,id) as DocumentReference<CommunityModel>,{
+numberOfMembers:increment(-1)
+            })
+          await  batch.commit()
+          dispatch(setSnippet([...communityStateValue.mySnippets.filter((val)=>val.communityId!==id)]))
+
+        } catch (error) {
+            setError(error)
+        }
+        setLoading(false)
+    }
     const  getMySnippets =async()=>{
         setLoading(true)
         try {
             const snippetDoc=await getDocs(collection(firestore,`users/${user.uid}/${COLLECTIONS.communitySnippets}`) as CollectionReference<communitySnippetsModel>) 
             
             const snippets =(await snippetDoc).docs.map(doc=>({...doc.data()}))
-            dispatch(addSnippet(snippets))
+            dispatch(setSnippet(snippets))
         } catch (error) {
-            
+            setError(error)
         }
         setLoading(false)
     }
     return {
         communityStateValue,
-        onJoinOrLeaveCommunity
+        onJoinOrLeaveCommunity,
+        loading,
+        error
 
     }
 }

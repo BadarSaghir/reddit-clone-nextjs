@@ -14,10 +14,15 @@ export const communitySlice = createSlice({
   initialState,
 
   reducers: {
-    addSnippet(state,action:PayloadAction<communitySnippetsModel[]>) {
+    setSnippet(state,action:PayloadAction<communitySnippetsModel[]>) {
       // console.log(state)
       state.mySnippets=action.payload
     },
+    resetSnippet(state) {
+        // console.log(state)
+        state.mySnippets=[]
+      },
+    
     leaveCommunity(
       state,
       action: PayloadAction<"login" | "signup" | "resetPassword">
@@ -26,6 +31,6 @@ export const communitySlice = createSlice({
     },
   },
 });
-export const { addSnippet, leaveCommunity } = communitySlice.actions;
+export const { resetSnippet,setSnippet, leaveCommunity } = communitySlice.actions;
 
 export default communitySlice.reducer;
