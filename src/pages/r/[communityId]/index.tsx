@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 import safeJsonStringify from 'safe-json-stringify';
+import CreatePostLink from '../../../components/Community/CreatePostLink';
 import Header from '../../../components/Community/Header';
 import NotFound from '../../../components/Community/NotFound';
 import PageContent from '../../../components/Layout/PageContent';
@@ -32,7 +33,7 @@ const RCommunity :NextPage<RCommunityProps> = ({communityData }) => {
     return <><Header communityData={communityData}/>
     <PageContent>
         <>
-        <Link href={"/r/riverpod"}>river</Link>
+        <CreatePostLink/>
         
         </>
         <>
