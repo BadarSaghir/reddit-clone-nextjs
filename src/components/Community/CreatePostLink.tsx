@@ -1,61 +1,36 @@
-import { Flex, Icon, Input, useColorModeValue } from "@chakra-ui/react";
+import { Flex, Icon, Input } from "@chakra-ui/react";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
 import { BsLink45Deg } from "react-icons/bs";
 import { FaReddit } from "react-icons/fa";
 import { IoImageOutline } from "react-icons/io5";
-import { openModalState } from "../../features/modal/Auth/authModalSlice";
-import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
+import useDirectory from "../../hooks/useDirectory";
 
+type CreatePostProps = {};
 
-const CreatePostLink: React.FC = () => {
+const CreatePostLink: React.FC<CreatePostProps> = () => {
   const router = useRouter();
-
-  const user =useAppSelector((state)=>state.userInfo.user);
-//   const { toggleMenuOpen } = useDirectory();
-//   const setAuthModelState = useSetRecoilState(authModelState);
-const dispatch = useAppDispatch()
-  const bg = useColorModeValue("white", "#1A202C");
-  const borderColor = useColorModeValue("gray.300", "#2D3748");
-  const searchBg = useColorModeValue("gray.50", "#2D3748");
-  const searchBorder = useColorModeValue("gray.200", "#4A5568");
-//  console.log(router.query);
-    
-
+  const { toggleMenuOpen } = useDirectory();
   const onClick = () => {
-    if (!user) {
-        dispatch(openModalState("login"))
-     
-      return;
-    }
-
-    const { communityId } = router.query;
-
-
-    if (communityId) {
-      router.push(`/r/${communityId}/submit`);
-      return;
-    }
-
-    // toggleMenuOpen();
-
-    /*
+    // Could check for user to open auth modal before redirecting to submit
+    const { community } = router.query;
     if (community) {
       router.push(`/r/${router.query.community}/submit`);
       return;
     }
-    */
+    // Open directory menu to select community to post to
+    toggleMenuOpen();
   };
-
   return (
     <Flex
       justify="space-evenly"
       align="center"
-      bg={bg}
+      bg="white"
       height="56px"
       borderRadius={4}
       border="1px solid"
-      borderColor={borderColor}
+      borderColor="gray.300"
       p={2}
       mb={4}
     >
@@ -65,18 +40,18 @@ const dispatch = useAppDispatch()
         fontSize="10pt"
         _placeholder={{ color: "gray.500" }}
         _hover={{
-          bg: bg,
+          bg: "white",
           border: "1px solid",
           borderColor: "blue.500",
         }}
         _focus={{
           outline: "none",
-          bg: bg,
+          bg: "white",
           border: "1px solid",
           borderColor: "blue.500",
         }}
-        bg={searchBg}
-        borderColor={searchBorder}
+        bg="gray.50"
+        borderColor="gray.200"
         height="36px"
         borderRadius={4}
         mr={4}
