@@ -4,13 +4,14 @@ import userInfoReducer from './features/modal/Auth/userInfoSlice'
 
 import counterReducer from './features/counter/counterSlice'
 import authModalReducer from "./features/modal"
+import { postReducer } from './features/community/communitySlice';
 
 export function makeStore() {
   return configureStore({
     middleware(getDefaultMiddleware) {
        return getDefaultMiddleware({serializableCheck:false})
     },
-    reducer: { counter: counterReducer,authModal:authModalReducer,userInfo:userInfoReducer,communities:communityReducer },
+    reducer: { counter: counterReducer,authModal:authModalReducer,userInfo:userInfoReducer,communities:communityReducer,postState:postReducer },
   })
 }
 
