@@ -1,0 +1,89 @@
+[debug] [2023-02-12T14:00:27.892Z] ----------------------------------------------------------------------
+[debug] [2023-02-12T14:00:27.899Z] Command:       /usr/bin/node /usr/local/bin/firebase deploy
+[debug] [2023-02-12T14:00:27.901Z] CLI Version:   11.21.0
+[debug] [2023-02-12T14:00:27.902Z] Platform:      linux
+[debug] [2023-02-12T14:00:27.903Z] Node Version:  v18.12.1
+[debug] [2023-02-12T14:00:27.904Z] Time:          Sun Feb 12 2023 19:00:27 GMT+0500 (Pakistan Standard Time)
+[debug] [2023-02-12T14:00:27.905Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2023-02-12T14:00:28.131Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-02-12T14:00:28.133Z] > authorizing via signed-in user (badardani11@gmail.com)
+[debug] [2023-02-12T14:00:28.134Z] [iam] checking project reddit-9523e for permissions ["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasehosting.sites.update","firebaserules.releases.create","firebaserules.releases.update","firebaserules.rulesets.create"]
+[debug] [2023-02-12T14:00:28.144Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/reddit-9523e:testIamPermissions [none]
+[debug] [2023-02-12T14:00:28.145Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/reddit-9523e:testIamPermissions x-goog-quota-user=projects/reddit-9523e
+[debug] [2023-02-12T14:00:28.145Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/reddit-9523e:testIamPermissions {"permissions":["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasehosting.sites.update","firebaserules.releases.create","firebaserules.releases.update","firebaserules.rulesets.create"]}
+[debug] [2023-02-12T14:00:30.008Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/reddit-9523e:testIamPermissions 200
+[debug] [2023-02-12T14:00:30.008Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/reddit-9523e:testIamPermissions {"permissions":["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasehosting.sites.update","firebaserules.releases.create","firebaserules.releases.update","firebaserules.rulesets.create"]}
+[debug] [2023-02-12T14:00:30.015Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/reddit-9523e [none]
+[debug] [2023-02-12T14:00:30.743Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/reddit-9523e 200
+[debug] [2023-02-12T14:00:30.745Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/reddit-9523e {"projectId":"reddit-9523e","projectNumber":"886860596973","displayName":"reddit","name":"projects/reddit-9523e","resources":{"hostingSite":"reddit-9523e","realtimeDatabaseInstance":"reddit-9523e-default-rtdb","storageBucket":"reddit-9523e.appspot.com","locationId":"us-central"},"state":"ACTIVE","etag":"1_44cabd6d-d1ce-4d1a-8111-de742f018c30"}
+[debug] [2023-02-12T14:00:39.983Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/reddit-9523e/sites pageToken=&pageSize=10
+[debug] [2023-02-12T14:00:42.224Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/reddit-9523e/sites 200
+[debug] [2023-02-12T14:00:42.226Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/reddit-9523e/sites {"sites":[{"name":"projects/reddit-9523e/sites/reddit-9523e","defaultUrl":"https://reddit-9523e.web.app","appId":"1:886860596973:web:3f50cb2e04585e34deeee4","type":"DEFAULT_SITE"}]}
+[debug] [2023-02-12T14:00:42.227Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:886860596973:web:3f50cb2e04585e34deeee4/config [none]
+[debug] [2023-02-12T14:00:43.655Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:886860596973:web:3f50cb2e04585e34deeee4/config 200
+[debug] [2023-02-12T14:00:43.656Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:886860596973:web:3f50cb2e04585e34deeee4/config {"projectId":"reddit-9523e","appId":"1:886860596973:web:3f50cb2e04585e34deeee4","databaseURL":"https://reddit-9523e-default-rtdb.asia-southeast1.firebasedatabase.app","storageBucket":"reddit-9523e.appspot.com","locationId":"us-central","apiKey":"AIzaSyBOpElWQEZFCJ06GKX3pgolZoc0apj7vNI","authDomain":"reddit-9523e.firebaseapp.com","messagingSenderId":"886860596973","measurementId":"G-KJPRMMMR7N"}
+[debug] [2023-02-12T14:07:07.854Z] Error: Command failed: npm i --omit dev --no-audit
+    at checkExecSyncError (node:child_process:871:11)
+    at execSync (node:child_process:943:15)
+    at prepareFrameworks (/usr/local/lib/node_modules/firebase-tools/lib/frameworks/index.js:335:42)
+    at async deploy (/usr/local/lib/node_modules/firebase-tools/lib/deploy/index.js:53:13)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-02-12T14:07:39.821Z] ----------------------------------------------------------------------
+[debug] [2023-02-12T14:07:39.828Z] Command:       /usr/bin/node /usr/local/bin/firebase deploy
+[debug] [2023-02-12T14:07:39.830Z] CLI Version:   11.21.0
+[debug] [2023-02-12T14:07:39.831Z] Platform:      linux
+[debug] [2023-02-12T14:07:39.831Z] Node Version:  v18.12.1
+[debug] [2023-02-12T14:07:39.832Z] Time:          Sun Feb 12 2023 19:07:39 GMT+0500 (Pakistan Standard Time)
+[debug] [2023-02-12T14:07:39.833Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2023-02-12T14:07:39.985Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-02-12T14:07:39.986Z] > authorizing via signed-in user (badardani11@gmail.com)
+[debug] [2023-02-12T14:07:39.986Z] [iam] checking project reddit-9523e for permissions ["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasehosting.sites.update","firebaserules.releases.create","firebaserules.releases.update","firebaserules.rulesets.create"]
+[debug] [2023-02-12T14:07:39.990Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/reddit-9523e:testIamPermissions [none]
+[debug] [2023-02-12T14:07:39.991Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/reddit-9523e:testIamPermissions x-goog-quota-user=projects/reddit-9523e
+[debug] [2023-02-12T14:07:39.991Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/reddit-9523e:testIamPermissions {"permissions":["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasehosting.sites.update","firebaserules.releases.create","firebaserules.releases.update","firebaserules.rulesets.create"]}
+[debug] [2023-02-12T14:07:41.890Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/reddit-9523e:testIamPermissions 200
+[debug] [2023-02-12T14:07:41.890Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/reddit-9523e:testIamPermissions {"permissions":["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasehosting.sites.update","firebaserules.releases.create","firebaserules.releases.update","firebaserules.rulesets.create"]}
+[debug] [2023-02-12T14:07:41.895Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/reddit-9523e [none]
+[debug] [2023-02-12T14:07:47.954Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/reddit-9523e 200
+[debug] [2023-02-12T14:07:47.955Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/reddit-9523e {"projectId":"reddit-9523e","projectNumber":"886860596973","displayName":"reddit","name":"projects/reddit-9523e","resources":{"hostingSite":"reddit-9523e","realtimeDatabaseInstance":"reddit-9523e-default-rtdb","storageBucket":"reddit-9523e.appspot.com","locationId":"us-central"},"state":"ACTIVE","etag":"1_44cabd6d-d1ce-4d1a-8111-de742f018c30"}
+[debug] [2023-02-12T14:07:55.314Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/reddit-9523e/sites pageToken=&pageSize=10
+[debug] [2023-02-12T14:07:57.390Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/reddit-9523e/sites 200
+[debug] [2023-02-12T14:07:57.391Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/reddit-9523e/sites {"sites":[{"name":"projects/reddit-9523e/sites/reddit-9523e","defaultUrl":"https://reddit-9523e.web.app","appId":"1:886860596973:web:3f50cb2e04585e34deeee4","type":"DEFAULT_SITE"}]}
+[debug] [2023-02-12T14:07:57.393Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:886860596973:web:3f50cb2e04585e34deeee4/config [none]
+[debug] [2023-02-12T14:07:58.661Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:886860596973:web:3f50cb2e04585e34deeee4/config 200
+[debug] [2023-02-12T14:07:58.662Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:886860596973:web:3f50cb2e04585e34deeee4/config {"projectId":"reddit-9523e","appId":"1:886860596973:web:3f50cb2e04585e34deeee4","databaseURL":"https://reddit-9523e-default-rtdb.asia-southeast1.firebasedatabase.app","storageBucket":"reddit-9523e.appspot.com","locationId":"us-central","apiKey":"AIzaSyBOpElWQEZFCJ06GKX3pgolZoc0apj7vNI","authDomain":"reddit-9523e.firebaseapp.com","messagingSenderId":"886860596973","measurementId":"G-KJPRMMMR7N"}
+[debug] [2023-02-12T14:10:47.963Z] Error: Command failed: npm i --omit dev --no-audit
+    at checkExecSyncError (node:child_process:871:11)
+    at execSync (node:child_process:943:15)
+    at prepareFrameworks (/usr/local/lib/node_modules/firebase-tools/lib/frameworks/index.js:335:42)
+    at async deploy (/usr/local/lib/node_modules/firebase-tools/lib/deploy/index.js:53:13)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-02-12T14:16:07.825Z] ----------------------------------------------------------------------
+[debug] [2023-02-12T14:16:07.832Z] Command:       /usr/bin/node /usr/local/bin/firebase deploy
+[debug] [2023-02-12T14:16:07.833Z] CLI Version:   11.21.0
+[debug] [2023-02-12T14:16:07.834Z] Platform:      linux
+[debug] [2023-02-12T14:16:07.834Z] Node Version:  v18.12.1
+[debug] [2023-02-12T14:16:07.870Z] Time:          Sun Feb 12 2023 19:16:07 GMT+0500 (Pakistan Standard Time)
+[debug] [2023-02-12T14:16:07.871Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2023-02-12T14:16:08.039Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-02-12T14:16:08.040Z] > authorizing via signed-in user (badardani11@gmail.com)
+[debug] [2023-02-12T14:16:08.040Z] [iam] checking project reddit-9523e for permissions ["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasehosting.sites.update","firebaserules.releases.create","firebaserules.releases.update","firebaserules.rulesets.create"]
+[debug] [2023-02-12T14:16:08.049Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/reddit-9523e:testIamPermissions [none]
+[debug] [2023-02-12T14:16:08.049Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/reddit-9523e:testIamPermissions x-goog-quota-user=projects/reddit-9523e
+[debug] [2023-02-12T14:16:08.050Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/reddit-9523e:testIamPermissions {"permissions":["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasehosting.sites.update","firebaserules.releases.create","firebaserules.releases.update","firebaserules.rulesets.create"]}
+[debug] [2023-02-12T14:16:11.690Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/reddit-9523e:testIamPermissions 200
+[debug] [2023-02-12T14:16:11.691Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/reddit-9523e:testIamPermissions {"permissions":["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasehosting.sites.update","firebaserules.releases.create","firebaserules.releases.update","firebaserules.rulesets.create"]}
+[debug] [2023-02-12T14:16:11.695Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/reddit-9523e [none]
+[debug] [2023-02-12T14:16:13.156Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/reddit-9523e 200
+[debug] [2023-02-12T14:16:13.157Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/reddit-9523e {"projectId":"reddit-9523e","projectNumber":"886860596973","displayName":"reddit","name":"projects/reddit-9523e","resources":{"hostingSite":"reddit-9523e","realtimeDatabaseInstance":"reddit-9523e-default-rtdb","storageBucket":"reddit-9523e.appspot.com","locationId":"us-central"},"state":"ACTIVE","etag":"1_44cabd6d-d1ce-4d1a-8111-de742f018c30"}
+[debug] [2023-02-12T14:16:19.890Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/reddit-9523e/sites pageToken=&pageSize=10
+[debug] [2023-02-12T14:16:23.069Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/reddit-9523e/sites 200
+[debug] [2023-02-12T14:16:23.069Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/reddit-9523e/sites {"sites":[{"name":"projects/reddit-9523e/sites/reddit-9523e","defaultUrl":"https://reddit-9523e.web.app","appId":"1:886860596973:web:3f50cb2e04585e34deeee4","type":"DEFAULT_SITE"}]}
+[debug] [2023-02-12T14:16:23.071Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:886860596973:web:3f50cb2e04585e34deeee4/config [none]
+[debug] [2023-02-12T14:16:24.576Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:886860596973:web:3f50cb2e04585e34deeee4/config 200
+[debug] [2023-02-12T14:16:24.576Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:886860596973:web:3f50cb2e04585e34deeee4/config {"projectId":"reddit-9523e","appId":"1:886860596973:web:3f50cb2e04585e34deeee4","databaseURL":"https://reddit-9523e-default-rtdb.asia-southeast1.firebasedatabase.app","storageBucket":"reddit-9523e.appspot.com","locationId":"us-central","apiKey":"AIzaSyBOpElWQEZFCJ06GKX3pgolZoc0apj7vNI","authDomain":"reddit-9523e.firebaseapp.com","messagingSenderId":"886860596973","measurementId":"G-KJPRMMMR7N"}
