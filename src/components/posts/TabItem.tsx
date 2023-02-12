@@ -1,6 +1,6 @@
 import { Flex, Icon, Text, useColorModeValue } from "@chakra-ui/react";
 import React from "react";
-import { TabItem } from "./NewPostForm";
+import {ITabItem as TabItem } from "./NewPostForm";
 
 type TabItemProps = {
   item: TabItem;

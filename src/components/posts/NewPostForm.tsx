@@ -59,7 +59,7 @@ const formTabs = [
   },
 ];
 
-export type TabItem = {
+export interface ITabItem {
   title: string;
   icon: typeof Icon.arguments;
 };
@@ -74,10 +74,10 @@ const NewPostForm: React.FC<NewPostFormProps> = ({
     title: "",
     body: "",
   });
-  const [encryptedData, setEncryptedData] = useState({
-    title: "",
-    body: "",
-  });
+  // const [encryptedData, setEncryptedData] = useState({
+  //   title: "",
+  //   body: "",
+  // });
   //const [selectedFile, setSelectedFile] = useState<string>();
   const { selectedFile, setSelectedFile, onSelectedFile } = useSelectFile();
   const [loading, setLoading] = useState(false);
@@ -90,18 +90,15 @@ const NewPostForm: React.FC<NewPostFormProps> = ({
 
     const splitName = user.email!.split("@")[0];
 
-    const dataName = CryptoJS.AES.encrypt(
-      JSON.stringify(splitName),
-      process.env.NEXT_PUBLIC_CRYPTO_SECRET_PASS as string
-    ).toString();
+    const dataName = splitName
 
     const newPost: Post = {
       communityId: communityId as string,
       creatorId: user.uid,
       communityImageURL: communityImageURL || "",
       creatorDisplayName: dataName,
-      title: encryptedData.title,
-      body: encryptedData.body,
+      title: textInput.title,
+      body: textInput.body,
       numberOfComments: 0,
       voteStatus: 0,
       createdAt: serverTimestamp() as Timestamp,
@@ -116,13 +113,9 @@ const NewPostForm: React.FC<NewPostFormProps> = ({
         await uploadString(imageRef, selectedFile, "data_url");
         const downloadURL = await getDownloadURL(imageRef);
 
-        const encryptDownloadURL = CryptoJS.AES.encrypt(
-          JSON.stringify(downloadURL),
-          process.env.NEXT_PUBLIC_CRYPTO_SECRET_PASS as string
-        ).toString();
 
         await updateDoc(postDocRef, {
-          imageURL: encryptDownloadURL,
+          imageURL: downloadURL,
         });
       }
       router.back();
@@ -149,21 +142,7 @@ const NewPostForm: React.FC<NewPostFormProps> = ({
   };
 */
 
-  const encryptData = (name: string, value: string) => {
-    try {
-      const data = CryptoJS.AES.encrypt(
-        JSON.stringify(value),
-        process.env.NEXT_PUBLIC_CRYPTO_SECRET_PASS as string
-      ).toString();
 
-      setEncryptedData((prev) => ({
-        ...prev,
-        [name]: data,
-      }));
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   const onTextChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -171,7 +150,7 @@ const NewPostForm: React.FC<NewPostFormProps> = ({
     const {
       target: { name, value },
     } = event;
-    encryptData(name, value);
+    
     setTextInput((prev) => ({
       ...prev,
       [name]: value,

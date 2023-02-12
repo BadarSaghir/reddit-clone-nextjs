@@ -58,12 +58,7 @@ const PostItem: React.FC<PostItemProps> = ({
   const [loadingImage, setLoadingImage] = useState(true);
   const [loadingDelete, setLoadingDelete] = useState(false);
   const [error, setError] = useState(false);
-  const [decryptedData, setDecryptedData] = useState({
-    title: "",
-    body: "",
-    creatorDisplayName: "",
-    imageURL: "",
-  });
+
   const singlePostPage = !onSelectPost;
   const router = useRouter();
 
@@ -106,16 +101,10 @@ const PostItem: React.FC<PostItemProps> = ({
     try {
       for (let index = 0; index < arr.length; index++) {
         if (arr[index]) {
-          const bytes = CryptoJS.AES.decrypt(
-            arr[index]!,
-            process.env.NEXT_PUBLIC_CRYPTO_SECRET_PASS as string
-          );
-          const data = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+        
+          const data =  arr[index]
 
-          setDecryptedData((prev) => ({
-            ...prev,
-            [arrName[index]]: data,
-          }));
+       
         } else return;
       }
     } catch (error) {
@@ -198,21 +187,21 @@ const PostItem: React.FC<PostItemProps> = ({
               </>
             )}
             <Text>
-              Posted by u/{decryptedData.creatorDisplayName}{" "}
+              Posted by u/{post.creatorDisplayName}{" "}
               {moment(new Date(post.createdAt?.seconds * 1000)).fromNow()}
             </Text>
           </Stack>
           <Text fontSize="12pt" fontWeight={600}>
-            {decryptedData.title}
+            {post.title}
           </Text>
-          <Text fontSize="10pt">{decryptedData.body}</Text>
+          <Text fontSize="10pt">{post.body}</Text>
           {post.imageURL && (
             <Flex justify="center" align="center" p={2}>
               {loadingImage && (
                 <Skeleton height="200px" width="100%" borderRadius={4} />
               )}
               <Image
-                src={decryptedData.imageURL}
+                src={post.imageURL}
                 maxHeight="460px"
                 alt="Post Image"
                 display={loadingImage ? "none" : "unset"}
