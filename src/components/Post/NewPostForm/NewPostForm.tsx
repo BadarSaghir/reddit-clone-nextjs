@@ -29,6 +29,8 @@ import TabItem from "./TabItem";
 import { getDownloadURL, ref, uploadString } from "firebase/storage";
 import TextInputs from "./TextInputs";
 import ImageUpload from "./ImageUpload";
+import { useAppDispatch } from "../../../hooks/hooks";
+import { setPostItems } from "../../../features/community/communitySlice";
 
 const formTabs = [
   {
@@ -80,7 +82,7 @@ const NewPostForm: React.FC<NewPostFormProps> = ({
   const [error, setError] = useState("");
   const router = useRouter();
   // const setPostItems = useSetRecoilState(postState);
-
+const dispatch =useAppDispatch()
   const handleCreatePost = async () => {
     setLoading(true);
     const { title, body } = textInputs;
@@ -115,6 +117,7 @@ const NewPostForm: React.FC<NewPostFormProps> = ({
       //   ...prev,
       //   postUpdateRequired: true,
       // }));
+      dispatch(setPostItems({postUpdateRequired:true}))
       router.back();
     } catch (error) {
       console.log("createPost error", error);

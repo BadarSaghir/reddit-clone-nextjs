@@ -10,15 +10,21 @@ import Header from '../../../components/Community/Header';
 import NotFound from '../../../components/Community/NotFound';
 import PageContent from '../../../components/Layout/PageContent';
 import { COLLECTIONS, CommunityModel } from '../../../constant';
+import { setCurrentCommunity } from '../../../features/modal/CreateCommunity/createCommunitySlice';
 import { firestore } from '../../../firebase/clientApp';
+import { useAppDispatch } from '../../../hooks/hooks';
 
 type RCommunityProps = {
-    communityData?:CommunityModel & {id:string}
+    communityData?:CommunityModel
 };
 
 const RCommunity :NextPage<RCommunityProps> = ({communityData }) => {
     const router = useRouter()
-
+   const dispatch= useAppDispatch()
+   useEffect(()=>{
+    dispatch(setCurrentCommunity(communityData))
+   }
+   ,[])
     // If the page is not yet generated, this will be displayed
     // initially until getStaticProps() finishes running
     if (router.isFallback) {

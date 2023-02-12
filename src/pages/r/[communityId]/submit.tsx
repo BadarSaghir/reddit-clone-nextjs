@@ -11,14 +11,14 @@ const SubmitPostPage: React.FC = () => {
  const {communityStateValue,error,loading}= useCommunityData()
   const router = useRouter();
   const { community } = router.query as {community:string};
- const comState= communityStateValue.mySnippets.find(value=>community===value.communityId)
+ const comState= communityStateValue.currentCommunity
   return (
   <PageContent>
       <>
         <Box p="14px 0px" borderBottom="1px solid" borderColor="white">
             <Text>Create a post</Text>
         </Box>
-        <NewPostForm user={user} communityId={comState.communityId} communityImageURL={comState.imageUrl}/>
+        <NewPostForm user={user} communityId={community} communityImageURL={comState.imageUrl}/>
       </>
       <>e</>
     </PageContent>

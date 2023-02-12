@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { PostState } from "./community";
 
 export const initialState: PostState = {
@@ -13,11 +13,13 @@ export const initialState: PostState = {
     name: "postState",
     initialState,
     reducers:{
-hellow:()=>{}
+        setPostItems:(state,action:PayloadAction<{postUpdateRequired:boolean}>)=>{
+            state={...state,postUpdateRequired:action.payload.postUpdateRequired}
+        }
 
     }
   });
 
-  export const {} =postState.actions
+  export const {setPostItems} =postState.actions
 
   export const postReducer = postState.reducer
