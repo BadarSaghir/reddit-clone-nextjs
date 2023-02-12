@@ -1322,3 +1322,69 @@ INFO: Detected non-HTTP/2 connection.
 [debug] [2023-02-12T13:43:00.650Z] Feb 12, 2023 6:43:00 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
 INFO: Detected non-HTTP/2 connection.
  {"metadata":{"emulator":{"name":"firestore"},"message":"Feb 12, 2023 6:43:00 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-02-12T13:43:46.225Z] Feb 12, 2023 6:43:46 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Feb 12, 2023 6:43:46 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-02-12T13:43:47.150Z] Feb 12, 2023 6:43:47 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Feb 12, 2023 6:43:47 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-02-12T13:44:00.705Z] Feb 12, 2023 6:44:00 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Feb 12, 2023 6:44:00 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-02-12T13:44:00.708Z] Feb 12, 2023 6:44:00 PM com.google.cloud.datastore.emulator.firestore.webchannel.FirestoreV1WebChannelAdapter$FirestoreListenHandler onClose
+INFO: channel closed
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Feb 12, 2023 6:44:00 PM com.google.cloud.datastore.emulator.firestore.webchannel.FirestoreV1WebChannelAdapter$FirestoreListenHandler onClose\nINFO: channel closed\n"}}
+[debug] [2023-02-12T13:44:46.237Z] Feb 12, 2023 6:44:46 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Feb 12, 2023 6:44:46 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-02-12T13:45:31.703Z] Feb 12, 2023 6:45:31 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Feb 12, 2023 6:45:31 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-02-12T13:46:31.719Z] Feb 12, 2023 6:46:31 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Feb 12, 2023 6:46:31 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-02-12T13:47:47.713Z] Feb 12, 2023 6:47:47 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Feb 12, 2023 6:47:47 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-02-12T13:47:57.450Z] ----------------------------------------------------------------------
+[debug] [2023-02-12T13:47:57.454Z] Command:       /usr/bin/node /usr/local/bin/firebase init hosting
+[debug] [2023-02-12T13:47:57.455Z] CLI Version:   11.21.0
+[debug] [2023-02-12T13:47:57.455Z] Platform:      linux
+[debug] [2023-02-12T13:47:57.455Z] Node Version:  v18.12.1
+[debug] [2023-02-12T13:47:57.456Z] Time:          Sun Feb 12 2023 18:47:57 GMT+0500 (Pakistan Standard Time)
+[debug] [2023-02-12T13:47:57.456Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2023-02-12T13:47:57.660Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-02-12T13:47:57.661Z] > authorizing via signed-in user (badardani11@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  /home/badar/workspace/projects/nextjs/redditclone/reddit-clone
+
+Before we get started, keep in mind:
+
+  * You are initializing within an existing Firebase project directory
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[debug] [2023-02-12T13:47:57.671Z] Using project from CLI flag: reddit-9523e
+[debug] [2023-02-12T13:47:57.680Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/reddit-9523e [none]
+[debug] [2023-02-12T13:47:58.409Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/reddit-9523e 200
+[debug] [2023-02-12T13:47:58.410Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/reddit-9523e {"projectId":"reddit-9523e","projectNumber":"886860596973","displayName":"reddit","name":"projects/reddit-9523e","resources":{"hostingSite":"reddit-9523e","realtimeDatabaseInstance":"reddit-9523e-default-rtdb","storageBucket":"reddit-9523e.appspot.com","locationId":"us-central"},"state":"ACTIVE","etag":"1_44cabd6d-d1ce-4d1a-8111-de742f018c30"}
+[info] i  Using project reddit-9523e (reddit) 
+[info] 
+=== Hosting Setup
+[debug] [2023-02-12T13:48:33.702Z] Feb 12, 2023 6:48:33 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Feb 12, 2023 6:48:33 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}

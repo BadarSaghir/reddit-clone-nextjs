@@ -21,9 +21,9 @@ const storage = getStorage(app)
 const host = (firestore.toJSON() as { settings?: { host?: string } }).settings?.host ?? '';
 
 // if (!getApps().length)
-if(!host.startsWith('localhost'))
-connectFirestoreEmulator(firestore,"localhost",8080)
-connectStorageEmulator(storage,"localhost",9199)
-connectAuthEmulator(auth,"http://localhost:9099",{disableWarnings:true})
+// if(!host.startsWith('localhost'))
+// connectFirestoreEmulator(firestore,"localhost",8080)
+// connectStorageEmulator(storage,"localhost",9199)
+// connectAuthEmulator(auth,"http://localhost:9099",{disableWarnings:true})
 
 export {app,firestore,auth, storage}
