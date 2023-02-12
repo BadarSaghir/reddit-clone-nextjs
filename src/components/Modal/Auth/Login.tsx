@@ -1,69 +1,95 @@
+import { Button, Flex, Input, Text, useColorModeValue } from "@chakra-ui/react";
 import React, { useState } from "react";
-import { Button, Flex, Text } from "@chakra-ui/react";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
-import { ModalView } from "../../../atoms/authModalAtom";
+import { useSetRecoilState } from "recoil";
+
+import { authModelState } from "../../../atoms/authModalAtom";
 import { auth } from "../../../firebase/clientApp";
 import { FIREBASE_ERRORS } from "../../../firebase/errors";
-import InputItem from "../../Layout/InputItem";
 
-type LoginProps = {
-  toggleView: (view: ModalView) => void;
-};
+type LoginProps = {};
 
-const Login: React.FC<LoginProps> = ({ toggleView }) => {
-  const [form, setForm] = useState({
+const Login: React.FC<LoginProps> = () => {
+  const setAuthModelState = useSetRecoilState(authModelState);
+  const [loginForm, setLoginForm] = useState({
     email: "",
     password: "",
   });
-  const [formError, setFormError] = useState("");
+  const searchBorder = useColorModeValue("blue.500", "#4A5568");
+  const inputBg = useColorModeValue("gray.50", "#4A5568");
+  const focusedInputBg = useColorModeValue("white", "#2D3748");
+  const placeholderColor = useColorModeValue("gray.500", "#CBD5E0");
 
-  const [signInWithEmailAndPassword, _, loading, authError] =
+  const [signInWithEmailAndPassword, user, loading, error] =
     useSignInWithEmailAndPassword(auth);
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (formError) setFormError("");
-    if (!form.email.includes("@")) {
-      return setFormError("Please enter a valid email");
-    }
-
-    // Valid form inputs
-    signInWithEmailAndPassword(form.email, form.password);
+    signInWithEmailAndPassword(loginForm.email, loginForm.password);
   };
 
-  const onChange = ({
-    target: { name, value },
-  }: React.ChangeEvent<HTMLInputElement>) => {
-    setForm((prev) => ({
+  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    // update state
+    setLoginForm((prev) => ({
       ...prev,
-      [name]: value,
+      [event.target.name]: event.target.value,
     }));
   };
 
   return (
     <form onSubmit={onSubmit}>
-      <InputItem
+      <Input
+        required
         name="email"
-        placeholder="email"
-        type="text"
+        placeholder="Email..."
+        type="email"
         mb={2}
         onChange={onChange}
+        fontSize="10pt"
+        _placeholder={{ color: placeholderColor }}
+        _hover={{
+          bg: focusedInputBg,
+          border: "1px solid",
+          borderColor: searchBorder,
+        }}
+        _focus={{
+          outline: "none",
+          bg: focusedInputBg,
+          border: "1px solid",
+          borderColor: searchBorder,
+        }}
+        bg={inputBg}
       />
-      <InputItem
+      <Input
+        required
         name="password"
-        placeholder="password"
+        placeholder="Password..."
         type="password"
+        mb={2}
         onChange={onChange}
+        fontSize="10pt"
+        _placeholder={{ color: placeholderColor }}
+        _hover={{
+          bg: focusedInputBg,
+          border: "1px solid",
+          borderColor: searchBorder,
+        }}
+        _focus={{
+          outline: "none",
+          bg: focusedInputBg,
+          border: "1px solid",
+          borderColor: searchBorder,
+        }}
+        bg={inputBg}
       />
-      <Text textAlign="center" mt={2} fontSize="10pt" color="red">
-        {formError ||
-          FIREBASE_ERRORS[authError?.message as keyof typeof FIREBASE_ERRORS]}
+      <Text textAlign="center" color="red" fontSize="10pt">
+        {FIREBASE_ERRORS[error?.message as keyof typeof FIREBASE_ERRORS]}
       </Text>
       <Button
         width="100%"
         height="36px"
-        mb={2}
         mt={2}
+        mb={2}
         type="submit"
         isLoading={loading}
       >
@@ -77,20 +103,30 @@ const Login: React.FC<LoginProps> = ({ toggleView }) => {
           fontSize="9pt"
           color="blue.500"
           cursor="pointer"
-          onClick={() => toggleView("resetPassword")}
+          onClick={() =>
+            setAuthModelState((prev) => ({
+              ...prev,
+              view: "resetPassword",
+            }))
+          }
         >
           Reset
         </Text>
       </Flex>
       <Flex fontSize="9pt" justifyContent="center">
-        <Text mr={1}>New here?</Text>
+        <Text mr={1}>New Here?</Text>
         <Text
           color="blue.500"
           fontWeight={700}
           cursor="pointer"
-          onClick={() => toggleView("signup")}
+          onClick={() =>
+            setAuthModelState((prev) => ({
+              ...prev,
+              view: "signup",
+            }))
+          }
         >
-          SIGN UP
+          Sign Up
         </Text>
       </Flex>
     </form>

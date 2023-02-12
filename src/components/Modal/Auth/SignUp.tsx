@@ -1,94 +1,167 @@
-import React, { useState } from "react";
-import { Button, Flex, Text } from "@chakra-ui/react";
+import { Button, Flex, Input, Text, useColorModeValue } from "@chakra-ui/react";
+import { User } from "firebase/auth";
+import { addDoc, collection } from "firebase/firestore";
+import React, { useEffect, useState } from "react";
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
-import { ModalView } from "../../../atoms/authModalAtom";
-import { auth } from "../../../firebase/clientApp";
+import { useSetRecoilState } from "recoil";
+
+import { authModelState } from "../../../atoms/authModalAtom";
+import { auth, firestore } from "../../../firebase/clientApp";
 import { FIREBASE_ERRORS } from "../../../firebase/errors";
-import InputItem from "../../Layout/InputItem";
 
-type SignUpProps = {
-  toggleView: (view: ModalView) => void;
-};
-
-const SignUp: React.FC<SignUpProps> = ({ toggleView }) => {
-  const [form, setForm] = useState({
+const SignUp: React.FC = () => {
+  const setAuthModelState = useSetRecoilState(authModelState);
+  const [signUpForm, setSignUpForm] = useState({
     email: "",
     password: "",
-    confirmPassword: "",
+    conformPassword: "",
   });
-  const [formError, setFormError] = useState("");
-  const [createUserWithEmailAndPassword, _, loading, authError] =
+  const [error, setError] = useState("");
+  const searchBorder = useColorModeValue("blue.500", "#4A5568");
+  const inputBg = useColorModeValue("gray.50", "#4A5568");
+  const focusedInputBg = useColorModeValue("white", "#2D3748");
+  const placeholderColor = useColorModeValue("gray.500", "#CBD5E0");
+
+  //console.log(signUpForm);
+
+  const [createUserWithEmailAndPassword, userCred, loading, userError] =
     useCreateUserWithEmailAndPassword(auth);
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (formError) setFormError("");
-    if (!form.email.includes("@")) {
-      return setFormError("Please enter a valid email");
+    if (error) setError("");
+
+    if (signUpForm.password !== signUpForm.conformPassword) {
+      setError("Password Do Not Match");
+      return;
     }
 
-    if (form.password !== form.confirmPassword) {
-      return setFormError("Passwords do not match");
-    }
-
-    // Valid form inputs
-    createUserWithEmailAndPassword(form.email, form.password);
+    createUserWithEmailAndPassword(signUpForm.email, signUpForm.password);
   };
 
-  const onChange = ({
-    target: { name, value },
-  }: React.ChangeEvent<HTMLInputElement>) => {
-    setForm((prev) => ({
+  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    // update state
+    setSignUpForm((prev) => ({
       ...prev,
-      [name]: value,
+      [event.target.name]: event.target.value,
     }));
   };
 
+  const createUserDocument = async (user: User) => {
+    await addDoc(
+      collection(firestore, "users"),
+      JSON.parse(JSON.stringify(user))
+    );
+  };
+
+  useEffect(() => {
+    if (userCred) {
+      createUserDocument(userCred.user);
+    }
+  }, [userCred]);
+
   return (
     <form onSubmit={onSubmit}>
-      <InputItem
+      <Input
+        required
         name="email"
-        placeholder="email"
-        type="text"
+        placeholder="Email..."
+        type="email"
         mb={2}
         onChange={onChange}
+        fontSize="10pt"
+        _placeholder={{ color: placeholderColor }}
+        _hover={{
+          bg: focusedInputBg,
+          border: "1px solid",
+          borderColor: searchBorder,
+        }}
+        _focus={{
+          outline: "none",
+          bg: focusedInputBg,
+          border: "1px solid",
+          borderColor: searchBorder,
+        }}
+        bg={inputBg}
       />
-      <InputItem
+      <Input
+        required
         name="password"
-        placeholder="password"
+        placeholder="Password..."
         type="password"
         mb={2}
         onChange={onChange}
+        fontSize="10pt"
+        _placeholder={{ color: placeholderColor }}
+        _hover={{
+          bg: focusedInputBg,
+          border: "1px solid",
+          borderColor: "blue.500",
+        }}
+        _focus={{
+          outline: "none",
+          bg: focusedInputBg,
+          border: "1px solid",
+          borderColor: searchBorder,
+        }}
+        bg={inputBg}
       />
-      <InputItem
-        name="confirmPassword"
-        placeholder="confirm password"
+
+      <Input
+        required
+        name="conformPassword"
+        placeholder="Confirm Password..."
         type="password"
+        mb={2}
         onChange={onChange}
+        fontSize="10pt"
+        _placeholder={{ color: placeholderColor }}
+        _hover={{
+          bg: focusedInputBg,
+          border: "1px solid",
+          borderColor: "blue.500",
+        }}
+        _focus={{
+          outline: "none",
+          bg: focusedInputBg,
+          border: "1px solid",
+          borderColor: searchBorder,
+        }}
+        bg={inputBg}
       />
-      <Text textAlign="center" mt={2} fontSize="10pt" color="red">
-        {formError ||
-          FIREBASE_ERRORS[authError?.message as keyof typeof FIREBASE_ERRORS]}
-      </Text>
+      {error ||
+        (userError && (
+          <Text textAlign="center" color="red" fontSize="10px">
+            {error ||
+              FIREBASE_ERRORS[
+                userError.message as keyof typeof FIREBASE_ERRORS
+              ]}
+          </Text>
+        ))}
       <Button
         width="100%"
         height="36px"
-        mb={2}
         mt={2}
+        mb={2}
         type="submit"
         isLoading={loading}
       >
         Sign Up
       </Button>
       <Flex fontSize="9pt" justifyContent="center">
-        <Text mr={1}>Have an account?</Text>
+        <Text mr={1}>Already a redditor?</Text>
         <Text
           color="blue.500"
           fontWeight={700}
           cursor="pointer"
-          onClick={() => toggleView("login")}
+          onClick={() =>
+            setAuthModelState((prev) => ({
+              ...prev,
+              view: "login",
+            }))
+          }
         >
-          LOG IN
+          Log In
         </Text>
       </Flex>
     </form>
