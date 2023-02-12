@@ -39,7 +39,7 @@ export const communitySlice = createSlice({
     setCurrentCommunity(state,action:PayloadAction<CommunityModel>) {
       // console.log(state)
       state.currentCommunity=action.payload
-      state.visitedCommunities[action.payload.id]=action.payload
+      state.visitedCommunities[action.payload.id || ""]=action.payload
     },
     resetSnippet(state) {
         // console.log(state)

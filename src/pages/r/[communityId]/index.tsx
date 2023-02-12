@@ -22,6 +22,7 @@ const RCommunity :NextPage<RCommunityProps> = ({communityData }) => {
     const router = useRouter()
    const dispatch= useAppDispatch()
    useEffect(()=>{
+    if(communityData)
     dispatch(setCurrentCommunity(communityData))
    }
    ,[])

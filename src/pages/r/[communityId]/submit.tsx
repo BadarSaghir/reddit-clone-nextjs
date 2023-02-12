@@ -10,7 +10,7 @@ const SubmitPostPage: React.FC = () => {
   const user = useAppSelector(state=>state.userInfo.user)
  const {communityStateValue,error,loading}= useCommunityData()
   const router = useRouter();
-  const { community } = router.query as {community:string};
+  const { communityId } = router.query as {communityId:string};
  const comState= communityStateValue.currentCommunity
   return (
   <PageContent>
@@ -18,7 +18,7 @@ const SubmitPostPage: React.FC = () => {
         <Box p="14px 0px" borderBottom="1px solid" borderColor="white">
             <Text>Create a post</Text>
         </Box>
-        <NewPostForm user={user} communityId={community} communityImageURL={comState.imageUrl}/>
+        <NewPostForm user={user} communityId={communityId} communityImageURL={comState.imageUrl}/>
       </>
       <>e</>
     </PageContent>
